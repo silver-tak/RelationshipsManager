@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="toolbarColor">#00011a</color>
+    <color name="background">#252D40</color>
+    <color name="light_background">#4e566b</color>
+    <color name="fontColor">#ECF4FF</color>
+    <color name="pointColor">#FEE300</color>
 </resources>

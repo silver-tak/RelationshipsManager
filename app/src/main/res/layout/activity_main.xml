@@ -10,21 +10,70 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         tools:context=".view.MainActivity">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/toolBarLayout"
+            android:background="@color/toolbarColor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@{}"/>
+            android:layout_height="60dp">
+            <com.silvertak.relationshipsmanager.customView.ClickSwitchImageView
+                android:id="@+id/settingIv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="20dp"
+                app:normalSrc="@mipmap/setting"
+                app:clickedSrc="@mipmap/setting_touched"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
 
-        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/ScoreStatusLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/toolBarLayout"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:text="나의 인간관계 관리 점수는?"
+                android:gravity="bottom"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:textSize="40dp"
+                android:textColor="@color/pointColor"
+                android:textStyle="bold"
+                android:gravity="bottom"
+                android:layout_alignParentBottom="true"
+                setScore="@{vm.relationshipScore.toString()}"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/bestRelationshipPeopleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/ScoreStatusLayout"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="20dp"
+                android:text="나의 인간관계 관리 점수는?"
+                android:gravity="bottom"/>
+        </RelativeLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ScoreStatusLayout">
 
         </androidx.recyclerview.widget.RecyclerView>
 
