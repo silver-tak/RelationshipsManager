@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager;
+package com.silvertak.relationshipsmanager.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.provider.ContactsContract;
 
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.silvertak.relationshipsmanager.R;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -25,23 +26,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PermissionListener permissionListener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                contacts();
-                getHistory();
-            }
-
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-
-            }
-        };
-
-        TedPermission.with(this)
-                .setPermissionListener(permissionListener)
-                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG, Manifest.permission.WRITE_CALL_LOG)
-                .check();
 
     }
 
