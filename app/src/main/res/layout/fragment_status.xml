@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="vm"
+            type="com.silvertak.relationshipsmanager.viewmodel.StatusViewModel" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.StatusFragment">
+
+        <LinearLayout
+            android:id="@+id/ScoreStatusLayout"
+            android:background="@drawable/card_navy_background"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="15dp"
+                android:text="나의 인간관계 관리 점수는?"
+                android:textColor="@color/fontColor"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/scoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="50dp"
+                android:textColor="@color/pointColor"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                setScore="@{vm.relationshipScore.toString()}"/>
+            <TextView
+                android:id="@+id/scoreCommentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20dp"
+                android:text="원만한 관계를 형성하고 있습니다"
+                android:textColor="@color/pointColor"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/ScoreStatusLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:weightSum="10"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/MostContactRanking"
+                android:layout_below="@id/ScoreStatusLayout"
+                android:background="@drawable/card_navy_background"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+                <TextView
+                    android:id="@+id/MostContactRankingTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="15dp"
+                    android:text="내가 가장 자주 연락하는 사람은?"
+                    android:textColor="@color/fontColor"
+                    android:gravity="center"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/MostContactRankingRecyclerView"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_below="@+id/MostContactRankingTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/NeedContactRanking"
+                android:layout_below="@id/MostContactRanking"
+                android:background="@drawable/card_navy_background"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/NeedContactRankingTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textSize="15dp"
+                    android:text="지금 가장 연락이 필요한 사람은?"
+                    android:textColor="@color/fontColor"
+                    android:gravity="center"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/NeedContactRankingRecyclerView"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_below="@+id/NeedContactRankingTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>

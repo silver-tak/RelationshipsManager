@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
     <color name="toolbarColor">#00011a</color>
     <color name="background">#252D40</color>
     <color name="light_background">#4e566b</color>
     <color name="fontColor">#ECF4FF</color>
     <color name="pointColor">#FEE300</color>
+    <color name="black">#000000</color>
+    <color name="transparentBlack">#96000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#fff</color>
+    <color name="gray">#f2f2f2</color>
+    <color name="darkgray">#7f7f7f</color>
+    <color name="thickgray">#bdbdbd</color>
+    <color name="red">#ff0000</color>
+    <color name="purple">#604a7b</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">@color/white</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="selectBottomLayout">#f3e5f5</color>
+    <color name="scrollbar">#ffc000</color>
+    <color name="selected">#F57E5E</color>
+    <color name="unselected">#717172</color>
+    <color name="hashtag">#6083EE</color>
 </resources>
