@@ -23,8 +23,5 @@
                 android:layout_gravity="top"
                 android:background="@drawable/tablayout_background"/>
         </androidx.viewpager.widget.ViewPager>
-
-
-
     </RelativeLayout>
 </layout>

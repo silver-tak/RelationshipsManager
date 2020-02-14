@@ -1,43 +1,19 @@
 package com.silvertak.relationshipsmanager.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.Manifest;
-import android.animation.ValueAnimator;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.CallLog;
-import android.provider.ContactsContract;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.TextView;
-
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.BaseFragmentViewPagerAdapter;
-import com.silvertak.relationshipsmanager.adapter.ViewPagerAdapter;
 import com.silvertak.relationshipsmanager.databinding.ActivityMainBinding;
 import com.silvertak.relationshipsmanager.fragment.GroupModifyFragment;
 import com.silvertak.relationshipsmanager.fragment.SettingFragment;
 import com.silvertak.relationshipsmanager.fragment.StatusFragment;
 import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
-import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.viewmodel.MainViewModel;
 
-import org.w3c.dom.Text;
-
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
                 .setDeniedTitle("권한 거부")
                 .setDeniedMessage("권한을 허용하지 않으시면 이용하실 수 없습니다")
                 .setDeniedCloseButtonText("닫기")
-                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG, Manifest.permission.WRITE_CALL_LOG)
+                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG, Manifest.permission.WRITE_CALL_LOG, Manifest.permission.CALL_PHONE)
                 .check();
     }
 
