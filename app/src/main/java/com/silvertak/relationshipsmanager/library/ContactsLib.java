@@ -1,9 +1,12 @@
 package com.silvertak.relationshipsmanager.library;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+
+import com.silvertak.relationshipsmanager.data.ContactInfo;
+
+import java.util.ArrayList;
 
 public class ContactsLib {
 
@@ -17,7 +20,9 @@ public class ContactsLib {
     /**
      * 주소록 정보 가져오기.
      */
-    public void contacts(){
+    public ArrayList<ContactInfo> contacts(){
+        ArrayList<ContactInfo> arrayList = new ArrayList<>();
+
         Cursor cursor = mActivity.managedQuery(
                 ContactsContract.Contacts.CONTENT_URI,
                 new String[] {
@@ -37,16 +42,20 @@ public class ContactsLib {
                 String v_phone = contactsPhone(v_id);
                 String v_email = contactsEmail(v_id);
 
-                System.out.println("id = " + v_id);
+                arrayList.add(new ContactInfo(v_id, v_display_name, v_phone, v_photo_id, v_email));
+
+                /*System.out.println("id = " + v_id);
                 System.out.println("display_name = " + v_display_name);
                 System.out.println("photo_id = " + v_photo_id);
                 System.out.println("phone = " + v_phone);
-                System.out.println("email = " + v_email);
+                System.out.println("email = " + v_email);*/
             }catch(Exception e) {
                 System.out.println(e.toString());
             }
         }
         cursor.close();
+
+        return arrayList;
     }
 
     /**

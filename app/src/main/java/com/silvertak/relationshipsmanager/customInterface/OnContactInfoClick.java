@@ -1,7 +1,7 @@
 package com.silvertak.relationshipsmanager.customInterface;
 
-import com.silvertak.relationshipsmanager.data.ContactPersonInfo;
+import com.silvertak.relationshipsmanager.data.ContactInfo;
 
 public interface OnContactInfoClick {
-    void onContactInfoClick(ContactPersonInfo info);
+    void onContactInfoClick(ContactInfo info);
 }

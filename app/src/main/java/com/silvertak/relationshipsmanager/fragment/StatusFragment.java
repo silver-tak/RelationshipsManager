@@ -1,7 +1,6 @@
 package com.silvertak.relationshipsmanager.fragment;
 
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableArrayList;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,63 +21,59 @@ import android.widget.TextView;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.ContactRankingAdapter;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
-import com.silvertak.relationshipsmanager.data.ContactPersonInfo;
+import com.silvertak.relationshipsmanager.data.CallLogInfo;
+import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
 import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.viewmodel.StatusViewModel;
 
+import java.util.ArrayList;
+
 public class StatusFragment extends BaseFragment {
 
     private static FragmentStatusBinding mBinding;
     private StatusViewModel statusViewModel;
-    private ObservableArrayList<ContactPersonInfo> mostContactRankingList;
-    private ObservableArrayList<ContactPersonInfo> needContactRankingList;
+
 
     public StatusFragment() {
     }
 
+    public static StatusFragment newInstance(Bundle args) {
+        StatusFragment fragment = new StatusFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        statusViewModel = ViewModelProviders.of(this).get(StatusViewModel.class);
+        statusViewModel.setDataArrayList(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        statusViewModel = ViewModelProviders.of(this).get(StatusViewModel.class);
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_status, container,false);
         mBinding.setVm(statusViewModel);
+        mBinding.setLifecycleOwner(this);
 
-        mostContactRankingList = new ObservableArrayList<>();
-        mBinding.setMostContactRankingList(mostContactRankingList);
-        needContactRankingList = new ObservableArrayList<>();
-        mBinding.setNeedContactRankingList(needContactRankingList);
+        return mBinding.getRoot();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
         ContactRankingAdapter contactRankingAdapter = new ContactRankingAdapter();
         contactRankingAdapter.setContactInfoClickListener(new OnContactInfoClick() {
             @Override
-            public void onContactInfoClick(ContactPersonInfo info) {
+            public void onContactInfoClick(ContactInfo info) {
                 //startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + info.getPhoneNumber())));
                 startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getPhoneNumber())));
             }
         });
         mBinding.MostContactRankingRecyclerView.setAdapter(contactRankingAdapter);
-
-        mBinding.setLifecycleOwner(this);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                statusViewModel.setRelationshipScore(88);
-                mostContactRankingList.add(new ContactPersonInfo("홍길동", "2020. 02. 15", "010-1111-1111"));
-                mostContactRankingList.add(new ContactPersonInfo("홍길동", "2020. 02. 15", "010-2222-2222"));
-                mostContactRankingList.add(new ContactPersonInfo("홍길동", "2020. 02. 15", "010-3333-3333"));
-                mostContactRankingList.add(new ContactPersonInfo("홍길동", "2020. 02. 15", "010-4444-4444"));
-                mostContactRankingList.add(new ContactPersonInfo("홍길동", "2020. 02. 15", "010-5555-5555"));
-            }
-        },1000);
-
-        return mBinding.getRoot();
+        statusViewModel.prepareVisibleData();
     }
 
     @BindingAdapter({"setScore"})
@@ -104,11 +98,11 @@ public class StatusFragment extends BaseFragment {
     }
 
     @BindingAdapter({"bind:item"})
-    public static void bindItem(RecyclerView recyclerView, ObservableArrayList<ContactPersonInfo> infos)
+    public static void bindItem(RecyclerView recyclerView, ObservableArrayList<ContactInfo> infos)
     {
         ContactRankingAdapter adapter = (ContactRankingAdapter)recyclerView.getAdapter();
         if(adapter != null)
-            adapter.setContactPersonInfos(infos);
+            adapter.setContactInfos(infos);
     }
 
     private static void setFaceLevel(int nValue)

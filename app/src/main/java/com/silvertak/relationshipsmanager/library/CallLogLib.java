@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
 
+import com.silvertak.relationshipsmanager.data.CallLogInfo;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CallLogLib {
@@ -45,7 +48,7 @@ public class CallLogLib {
                 sb.append(", content number=").append(cur.getString(cur.getColumnIndex(CallLog.Calls.NUMBER)));
                 sb.append(", duration=").append(cur.getString(cur.getColumnIndex(CallLog.Calls.DURATION)));
                 sb.append(", new=").append(cur.getString(cur.getColumnIndex(CallLog.Calls.NEW)));
-                sb.append(", date=").append(DateLib.millis2Time(cur.getLong(cur.getColumnIndex(CallLog.Calls.DATE)))).append("]");
+                sb.append(", date=").append(cur.getLong(cur.getColumnIndex(CallLog.Calls.DATE))).append("]");
 
                 System.out.println("call history[" + sb.toString());
 
@@ -57,44 +60,31 @@ public class CallLogLib {
     }
 
     // CallLog를 반환합니다.
-    public void getCallLog() {
-        StringBuffer sb = new StringBuffer();
+    public ArrayList<CallLogInfo> getCallLog() {
+        ArrayList<CallLogInfo> callLogInfos = new ArrayList<>();
+
         Cursor managedCursor = mActivity.managedQuery(CallLog.Calls.CONTENT_URI, null,
                 null, null, null);
         int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
         int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
         int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
         int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
-        sb.append("Call Details :");
         while (managedCursor.moveToNext()) {
+            /**
+             * CallLog.Calls.OUTGOING_TYPE : 발신
+             * CallLog.Calls.INCOMING_TYPE : 수신
+             * CallLog.Calls.MISSED_TYPE : 부재중
+             */
             String phNumber = managedCursor.getString(number);
             String callType = managedCursor.getString(type);
             String callDate = managedCursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
-            String callDuration = managedCursor.getString(duration);
-            String dir = null;
-            int dircode = Integer.parseInt(callType);
-            switch (dircode) {
-                case CallLog.Calls.OUTGOING_TYPE:
-                    dir = "OUTGOING";
-                    break;
+            String callDuration = managedCursor.getString(duration);    // sec
 
-                case CallLog.Calls.INCOMING_TYPE:
-                    dir = "INCOMING";
-                    break;
-
-                case CallLog.Calls.MISSED_TYPE:
-                    dir = "MISSED";
-                    break;
-            }
-            sb.append("\nPhone Number:--- " + phNumber + " \nCall Type:--- "
-                    + dir + " \nCall Date:--- " + callDayTime
-                    + " \nCall duration in sec :--- " + callDuration);
-            sb.append("\n----------------------------------");
-
-            System.out.println(sb.toString());
-            sb = new StringBuffer();
+            callLogInfos.add(new CallLogInfo(phNumber, Integer.valueOf(callType), callDayTime, Integer.valueOf(callDuration)));
         }
         managedCursor.close();
+
+        return callLogInfos;
     }
 }

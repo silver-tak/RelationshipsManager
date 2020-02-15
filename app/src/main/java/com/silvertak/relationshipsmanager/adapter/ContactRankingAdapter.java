@@ -4,39 +4,32 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.silvertak.relationshipsmanager.BR;
-import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
-import com.silvertak.relationshipsmanager.data.ContactPersonInfo;
+import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.databinding.ContactRankingItemBinding;
-
-import java.util.ArrayList;
-import java.util.Queue;
 
 public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAdapter.CustomViewHolder> implements RecyclerView.OnItemTouchListener{
 
-    private ObservableArrayList<ContactPersonInfo> contactPersonInfos;
+    private ObservableArrayList<ContactInfo> contactInfos;
     private OnContactInfoClick contactInfoClickListener;
 
-    public ContactRankingAdapter(ObservableArrayList<ContactPersonInfo> queue)
+    public ContactRankingAdapter(ObservableArrayList<ContactInfo> queue)
     {
-        this.contactPersonInfos = queue;
+        this.contactInfos = queue;
     }
 
     public ContactRankingAdapter()
     {
     }
 
-    public void setContactPersonInfos(ObservableArrayList<ContactPersonInfo> infos)
+    public void setContactInfos(ObservableArrayList<ContactInfo> infos)
     {
-        this.contactPersonInfos = infos;
+        this.contactInfos = infos;
         this.notifyDataSetChanged();
     }
 
@@ -48,11 +41,11 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position)
     {
-        holder.bind(contactPersonInfos.get(position));
+        holder.bind(contactInfos.get(position));
         holder.mBinding.callIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                contactInfoClickListener.onContactInfoClick(contactPersonInfos.get(position));
+                contactInfoClickListener.onContactInfoClick(contactInfos.get(position));
             }
         });
     }
@@ -68,7 +61,7 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
 
     @Override
     public int getItemCount() {
-        return contactPersonInfos.size();
+        return contactInfos.size();
     }
 
     @Override
@@ -79,8 +72,8 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
             if(childView != null)
             {
                 int currentPosition = rv.getChildAdapterPosition(childView);
-                if(contactPersonInfos.size() > currentPosition)
-                    contactInfoClickListener.onContactInfoClick(contactPersonInfos.get(currentPosition));
+                if(contactInfos.size() > currentPosition)
+                    contactInfoClickListener.onContactInfoClick(contactInfos.get(currentPosition));
             }
         }
 
@@ -105,7 +98,7 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
             this.mBinding = binding;
         }
 
-        void bind(ContactPersonInfo info)
+        void bind(ContactInfo info)
         {
             mBinding.setInfo(info);
         }

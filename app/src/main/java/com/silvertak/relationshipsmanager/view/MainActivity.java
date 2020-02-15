@@ -46,12 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFragmentAdapter()
     {
-        mFragmentArrayList.add(new StatusFragment());
+        Bundle args = getIntent().getBundleExtra("data");
+
+        mFragmentArrayList.add(StatusFragment.newInstance(args));
         mFragmentTitleArrayList.add("현황");
-        mFragmentArrayList.add(new GroupModifyFragment());
+        mFragmentArrayList.add(GroupModifyFragment.newInstance(args));
         mFragmentTitleArrayList.add("그룹 편집");
-        mFragmentArrayList.add(new SettingFragment());
+        mFragmentArrayList.add(SettingFragment.newInstance(args));
         mFragmentTitleArrayList.add("설정");
+
         baseFragmentViewPagerAdapter = new BaseFragmentViewPagerAdapter(getSupportFragmentManager());
         baseFragmentViewPagerAdapter.setFragmentArrayList(mFragmentArrayList);
         baseFragmentViewPagerAdapter.setFragmentTitleArrayList(mFragmentTitleArrayList);

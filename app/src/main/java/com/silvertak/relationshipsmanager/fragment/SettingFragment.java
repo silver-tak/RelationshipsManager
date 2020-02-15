@@ -19,6 +19,12 @@ public class SettingFragment extends BaseFragment {
         // Required empty public constructor
     }
 
+    public static SettingFragment newInstance(Bundle args) {
+        SettingFragment fragment = new SettingFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

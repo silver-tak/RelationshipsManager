@@ -3,7 +3,7 @@
     <data>
         <variable
             name="info"
-            type="com.silvertak.relationshipsmanager.data.ContactPersonInfo" />
+            type="com.silvertak.relationshipsmanager.data.ContactInfo" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,7 +17,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/white">
+            android:background="@color/fontColor">
             <LinearLayout
                 android:id="@+id/profileIvLayout"
                 android:layout_width="80dp"
