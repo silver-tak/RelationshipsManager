@@ -8,4 +8,9 @@ public class StringLib {
         else
             return false;
     }
+
+    public static String getOnlyNumber(String strValue)
+    {
+        return strValue.replaceAll("[^0-9]", "");
+    }
 }

@@ -2,6 +2,8 @@ package com.silvertak.relationshipsmanager.library;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
 
 import com.silvertak.relationshipsmanager.data.ContactInfo;
@@ -42,7 +44,11 @@ public class ContactsLib {
                 String v_phone = contactsPhone(v_id);
                 String v_email = contactsEmail(v_id);
 
-                arrayList.add(new ContactInfo(v_id, v_display_name, v_phone, v_photo_id, v_email));
+                ContactInfo contactInfo = new ContactInfo(v_id, v_display_name, v_phone, v_photo_id, v_email);
+                if(!StringLib.isEmpty(v_photo_id))
+                    contactInfo.setPhotoBytes(queryContactImage(Integer.valueOf(v_photo_id)));
+
+                arrayList.add(contactInfo);
 
                 /*System.out.println("id = " + v_id);
                 System.out.println("display_name = " + v_display_name);
@@ -56,6 +62,33 @@ public class ContactsLib {
         cursor.close();
 
         return arrayList;
+    }
+
+    /**
+     * PhotoId에 기반하여 photo Bitmap 추출
+     * @param imageDataRow
+     * @return
+     */
+    private byte[] queryContactImage(int imageDataRow) {
+        Cursor c = mActivity.getContentResolver().query(ContactsContract.Data.CONTENT_URI, new String[] {
+                ContactsContract.CommonDataKinds.Photo.PHOTO
+        }, ContactsContract.Data._ID + "=?", new String[] {
+                Integer.toString(imageDataRow)
+        }, null);
+        byte[] imageBytes = null;
+        if (c != null) {
+            if (c.moveToFirst()) {
+                imageBytes = c.getBlob(0);
+            }
+            c.close();
+        }
+
+        if (imageBytes != null) {
+            //return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            return imageBytes;
+        } else {
+            return null;
+        }
     }
 
     /**

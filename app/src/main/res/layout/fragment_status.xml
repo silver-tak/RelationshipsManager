@@ -67,77 +67,42 @@
                 android:textColor="@color/pointColor"
                 android:gravity="center"/>
         </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/TodayNeedContact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_below="@+id/ScoreStatusLayout"
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/MostContactRanking"
+            android:layout_below="@id/ScoreStatusLayout"
+            android:background="@drawable/card_navy_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:weightSum="10"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/MostContactRanking"
-                android:layout_below="@id/ScoreStatusLayout"
-                android:background="@drawable/card_navy_background"
+            android:layout_margin="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+            <TextView
+                android:id="@+id/MostContactRankingTv"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp">
-                <TextView
-                    android:id="@+id/MostContactRankingTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textSize="15dp"
-                    android:text="내가 가장 자주 연락하는 사람은?"
-                    android:textColor="@color/fontColor"
-                    android:gravity="center"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/MostContactRankingRecyclerView"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_below="@+id/MostContactRankingTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    bind:item="@{vm.mostContactRankingList}"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/NeedContactRanking"
-                android:layout_below="@id/MostContactRanking"
-                android:background="@drawable/card_navy_background"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="15dp"
+                android:text="내가 가장 자주 연락하는 사람은?"
+                android:textColor="@color/fontColor"
+                android:gravity="center"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/MostContactRankingRecyclerView"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_below="@+id/MostContactRankingTv"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/NeedContactRankingTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textSize="15dp"
-                    android:text="지금 가장 연락이 필요한 사람은?"
-                    android:textColor="@color/fontColor"
-                    android:gravity="center"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/NeedContactRankingRecyclerView"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:layout_below="@+id/NeedContactRankingTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </RelativeLayout>
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:item="@{vm.mostContactRankingList}"/>
+        </RelativeLayout>
 
-        </LinearLayout>
+
 
 
     </RelativeLayout>

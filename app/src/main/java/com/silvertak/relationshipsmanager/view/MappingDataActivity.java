@@ -9,8 +9,11 @@ import android.os.Bundle;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.ContactInfo;
+import com.silvertak.relationshipsmanager.data.PersonRelationshipArray;
+import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.library.CallLogLib;
 import com.silvertak.relationshipsmanager.library.ContactsLib;
+import com.silvertak.relationshipsmanager.library.DataCombineLib;
 
 import java.util.ArrayList;
 
@@ -36,16 +39,21 @@ public class MappingDataActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    dialog.setMessage("주소록 정보를 동기화 중입니다.");
+                    dialog.setMessage("주소록 정보를 동기화 중입니다......");
                     ContactsLib contactsLib = new ContactsLib(MappingDataActivity.this);
                     ArrayList<ContactInfo> contactInfos = contactsLib.contacts();
-                    dialog.setMessage("통화기록 정보를 동기화 중입니다.");
+
+                    dialog.setMessage("통화기록 정보를 동기화 중입니다......");
                     CallLogLib callLogLib = new CallLogLib(MappingDataActivity.this);
                     ArrayList<CallLogInfo> callLogInfos = callLogLib.getCallLog();
+
+                    dialog.setMessage("인간관계 점수를 측정중입니다......");
+                    ArrayList<PersonRelationshipInfo> personRelationshipInfos = DataCombineLib.combineContactWithCallLog(contactInfos, callLogInfos);
 
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("contactInfos", contactInfos);
                     bundle.putParcelableArrayList("callLogInfos", callLogInfos);
+                    bundle.putParcelableArrayList("personRelationships", personRelationshipInfos);
 
                     dialog.dismiss();
                     startNextActivity(bundle);

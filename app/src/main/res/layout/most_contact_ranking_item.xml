@@ -2,12 +2,13 @@
 <layout>
     <data>
         <variable
-            name="info"
-            type="com.silvertak.relationshipsmanager.data.ContactInfo" />
+            name="PersonRelationshipInfo"
+            type="com.silvertak.relationshipsmanager.data.PersonRelationshipInfo" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:contact="http://schemas.android.com/tools"
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,14 +27,15 @@
                 android:layout_alignParentStart="true">
                 <ImageView
                     android:id="@+id/profileIv"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    contact:photo="@{PersonRelationshipInfo.contactInfo.photoBitmap}"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@id/profileIvLayout"
-                android:layout_toLeftOf="@id/functionLayout"
+                android:layout_toLeftOf="@id/CountLayout"
                 android:weightSum="10"
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
@@ -44,36 +46,42 @@
                     android:layout_height="0dp"
                     android:layout_weight="5"
                     android:textColor="@color/background"
-                    android:text="@{info.name}"
+                    android:text="@{PersonRelationshipInfo.contactInfo.name}"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
                     android:gravity="center_vertical"/>
                 <TextView
-                    android:id="@+id/lastContactDateTv"
+                    android:id="@+id/phoneNumberTv"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
                     android:textColor="@color/background"
-                    android:text="@{info.phoneNumber}"
+                    android:text="@{PersonRelationshipInfo.contactInfo.phoneNumber}"
                     android:gravity="center_vertical"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/functionLayout"
-                android:layout_width="130dp"
-                android:layout_height="60dp"
-                android:gravity="center"
-                android:layout_alignParentEnd="true">
-                <com.silvertak.relationshipsmanager.customView.ClickSwitchImageView
-                    android:id="@+id/callIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:normalSrc="@mipmap/call"
-                    app:clickedSrc="@mipmap/call_touched"/>
-                <com.silvertak.relationshipsmanager.customView.ClickSwitchImageView
-                    android:id="@+id/smsIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    app:normalSrc="@mipmap/sms"
-                    app:clickedSrc="@mipmap/sms_touched"/>
+                android:id="@+id/CountLayout"
+                android:layout_alignParentEnd="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(PersonRelationshipInfo.callLogInfos.size())}"
+                    android:textSize="30dp"
+                    android:textColor="@color/background"/>
+                <TextView
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="회"
+                    android:textSize="20dp"
+                    android:textColor="@color/background"/>
             </LinearLayout>
 
         </RelativeLayout>

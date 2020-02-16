@@ -2,6 +2,8 @@ package com.silvertak.relationshipsmanager.fragment;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -16,13 +18,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.ContactRankingAdapter;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
 import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.ContactInfo;
+import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
 import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
@@ -34,7 +39,6 @@ public class StatusFragment extends BaseFragment {
 
     private static FragmentStatusBinding mBinding;
     private StatusViewModel statusViewModel;
-
 
     public StatusFragment() {
     }
@@ -48,12 +52,14 @@ public class StatusFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        statusViewModel = ViewModelProviders.of(this).get(StatusViewModel.class);
-        statusViewModel.setDataArrayList(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        statusViewModel = ViewModelProviders.of(this).get(StatusViewModel.class);
+        statusViewModel.setDataArrayList(getArguments());
+
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_status, container,false);
         mBinding.setVm(statusViewModel);
         mBinding.setLifecycleOwner(this);
@@ -67,9 +73,9 @@ public class StatusFragment extends BaseFragment {
         ContactRankingAdapter contactRankingAdapter = new ContactRankingAdapter();
         contactRankingAdapter.setContactInfoClickListener(new OnContactInfoClick() {
             @Override
-            public void onContactInfoClick(ContactInfo info) {
+            public void onContactInfoClick(PersonRelationshipInfo info) {
                 //startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + info.getPhoneNumber())));
-                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getPhoneNumber())));
+                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getContactInfo().getPhoneNumber())));
             }
         });
         mBinding.MostContactRankingRecyclerView.setAdapter(contactRankingAdapter);
@@ -98,11 +104,20 @@ public class StatusFragment extends BaseFragment {
     }
 
     @BindingAdapter({"bind:item"})
-    public static void bindItem(RecyclerView recyclerView, ObservableArrayList<ContactInfo> infos)
+    public static void bindItem(RecyclerView recyclerView, ObservableArrayList<PersonRelationshipInfo> infos)
     {
         ContactRankingAdapter adapter = (ContactRankingAdapter)recyclerView.getAdapter();
         if(adapter != null)
             adapter.setContactInfos(infos);
+    }
+
+    @BindingAdapter({"contact:photo"})
+    public static void contactPhoto(ImageView iv, Bitmap bitmap)
+    {
+        if(bitmap != null)
+            Glide.with(iv).load(bitmap).into(iv);
+        else
+            Glide.with(iv).load(BitmapFactory.decodeResource(iv.getResources(), R.mipmap.unknown_user)).into(iv);
     }
 
     private static void setFaceLevel(int nValue)

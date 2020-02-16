@@ -1,7 +1,11 @@
 package com.silvertak.relationshipsmanager.data;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.silvertak.relationshipsmanager.library.StringLib;
 
 import java.io.Serializable;
 
@@ -13,12 +17,16 @@ public class ContactInfo implements Parcelable {
     private String strPhotoId = "";
     private String strEmail = "";
 
+    private byte[] photoBytes = new byte[]{};
+
     protected ContactInfo(Parcel in) {
         strId = in.readString();
         strName = in.readString();
         strPhoneNumber = in.readString();
         strPhotoId = in.readString();
         strEmail = in.readString();
+        photoBytes = new byte[in.readInt()];
+        in.readByteArray(photoBytes);
     }
 
     public static final Creator<ContactInfo> CREATOR = new Creator<ContactInfo>() {
@@ -45,15 +53,22 @@ public class ContactInfo implements Parcelable {
         parcel.writeString(strPhoneNumber);
         parcel.writeString(strPhotoId);
         parcel.writeString(strEmail);
+        parcel.writeInt(photoBytes.length);
+        parcel.writeByteArray(photoBytes);
     }
 
     public ContactInfo(String id, String name, String phoneNumber, String photoId, String email)
     {
-        this.strId = id;
-        this.strName = name;
-        this.strPhoneNumber = phoneNumber;
-        this.strPhotoId = photoId;
-        this.strEmail = email;
+        if(!StringLib.isEmpty(id)) this.strId = id;
+        if(!StringLib.isEmpty(name)) this.strName = name;
+        if(!StringLib.isEmpty(phoneNumber)) this.strPhoneNumber = phoneNumber;
+        if(!StringLib.isEmpty(photoId)) this.strPhotoId = photoId;
+        if(!StringLib.isEmpty(email)) this.strEmail = email;
+    }
+
+    public void setPhotoBytes(byte[] bytes)
+    {
+        this.photoBytes = bytes;
     }
 
     public String getName() {
@@ -74,5 +89,11 @@ public class ContactInfo implements Parcelable {
 
     public String getEmail() {
         return strEmail;
+    }
+
+    public Bitmap getPhotoBitmap() {
+        if(photoBytes != null && photoBytes.length > 0)
+            return BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.length);
+        else return null;
     }
 }
