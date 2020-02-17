@@ -31,6 +31,7 @@ import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
 import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
+import com.silvertak.relationshipsmanager.view.DetailTransparentActivity;
 import com.silvertak.relationshipsmanager.viewmodel.StatusViewModel;
 
 import java.util.ArrayList;
@@ -68,18 +69,27 @@ public class StatusFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
+
         ContactRankingAdapter contactRankingAdapter = new ContactRankingAdapter();
         contactRankingAdapter.setContactInfoClickListener(new OnContactInfoClick() {
             @Override
             public void onContactInfoClick(PersonRelationshipInfo info) {
                 //startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + info.getPhoneNumber())));
-                startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getContactInfo().getPhoneNumber())));
+                //startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getContactInfo().getPhoneNumber())));
+                startActivity(new Intent(getActivity(), DetailTransparentActivity.class));
+                getActivity().overridePendingTransition(0,0);
             }
         });
         mBinding.MostContactRankingRecyclerView.setAdapter(contactRankingAdapter);
         statusViewModel.prepareVisibleData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @BindingAdapter({"setScore"})

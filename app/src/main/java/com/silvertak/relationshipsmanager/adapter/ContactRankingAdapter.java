@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.TranslateAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
@@ -38,19 +40,24 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position)
     {
         holder.bind(contactInfos.get(position));
-        /*holder.mBinding.callIv.setOnClickListener(new View.OnClickListener() {
+        holder.mBinding.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 contactInfoClickListener.onContactInfoClick(contactInfos.get(position));
             }
-        });*/
+        });
+        setAnimation(holder.itemView);
+    }
+
+    private void setAnimation(View view) {
+        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(300);
+        view.startAnimation(anim);
     }
 
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.most_contact_ranking_item, parent, false);
-        //CustomViewHolder customViewHolder = new CustomViewHolder(view);
         MostContactRankingItemBinding contactRankingItemBinding = MostContactRankingItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new CustomViewHolder(contactRankingItemBinding);
     }
