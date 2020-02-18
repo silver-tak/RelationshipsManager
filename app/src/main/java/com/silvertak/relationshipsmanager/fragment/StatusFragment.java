@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.ContactRankingAdapter;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
@@ -29,6 +30,7 @@ import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
+import com.silvertak.relationshipsmanager.define.StringDefine;
 import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.view.DetailTransparentActivity;
@@ -76,10 +78,10 @@ public class StatusFragment extends BaseFragment {
         contactRankingAdapter.setContactInfoClickListener(new OnContactInfoClick() {
             @Override
             public void onContactInfoClick(PersonRelationshipInfo info) {
-                //startActivity(new Intent("android.intent.action.CALL", Uri.parse("tel:" + info.getPhoneNumber())));
-                //startActivity(new Intent("android.intent.action.DIAL", Uri.parse("tel:" + info.getContactInfo().getPhoneNumber())));
-                startActivity(new Intent(getActivity(), DetailTransparentActivity.class));
-                getActivity().overridePendingTransition(0,0);
+                Intent intent = new Intent(getActivity(), DetailTransparentActivity.class);
+                intent.putExtra(StringDefine.KEY_PERSON_RELATIONSHIP_INFO, info);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.scale_zoom_in,0);
             }
         });
         mBinding.MostContactRankingRecyclerView.setAdapter(contactRankingAdapter);
@@ -89,10 +91,9 @@ public class StatusFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
-    @BindingAdapter({"setScore"})
+    @androidx.databinding.BindingAdapter({"setScore"})
     public static void setScoreAnimation(final TextView view, final String strValue) {
         if(StringLib.isEmpty(strValue))
             return;
@@ -111,23 +112,6 @@ public class StatusFragment extends BaseFragment {
         valueAnimator.setInterpolator(new DecelerateInterpolator());
         valueAnimator.setDuration(2000);
         valueAnimator.start();
-    }
-
-    @BindingAdapter({"bind:item"})
-    public static void bindItem(RecyclerView recyclerView, ObservableArrayList<PersonRelationshipInfo> infos)
-    {
-        ContactRankingAdapter adapter = (ContactRankingAdapter)recyclerView.getAdapter();
-        if(adapter != null)
-            adapter.setContactInfos(infos);
-    }
-
-    @BindingAdapter({"contact:photo"})
-    public static void contactPhoto(ImageView iv, Bitmap bitmap)
-    {
-        if(bitmap != null)
-            Glide.with(iv).load(bitmap).into(iv);
-        else
-            Glide.with(iv).load(BitmapFactory.decodeResource(iv.getResources(), R.mipmap.unknown_user)).into(iv);
     }
 
     private static void setFaceLevel(int nValue)

@@ -22,4 +22,10 @@
     <color name="selected">#F57E5E</color>
     <color name="unselected">#717172</color>
     <color name="hashtag">#6083EE</color>
+
+    <color name="call_button">#64dd17</color>
+    <color name="call_button_click">#1faa00</color>
+
+    <color name="sms_button">#ffab00</color>
+    <color name="sms_button_click">#c67c00</color>
 </resources>

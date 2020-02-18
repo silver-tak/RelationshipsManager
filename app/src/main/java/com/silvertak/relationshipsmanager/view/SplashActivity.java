@@ -54,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
     private void startNextActivity()
     {
         startActivity(new Intent(SplashActivity.this, MappingDataActivity.class));
-        //overridePendingTransition(0, 0);
+        overridePendingTransition(0, 0);
         finish();
     }
 }

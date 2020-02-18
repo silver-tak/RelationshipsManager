@@ -4,8 +4,10 @@
         <attr name="normalSrc" format="reference"/>
         <attr name="clickedSrc" format="reference"/>
     </declare-styleable>
-    <declare-styleable name="ClickSwitchColorTextView">
+    <declare-styleable name="ClickSwitchBackgroundColorTextView">
         <attr name="normalBackgroundColor" format="reference"/>
         <attr name="clickedBackgroundColor" format="reference"/>
+        <attr name="normalBackgroundResource" format="reference"/>
+        <attr name="clickedBackgroundResource" format="reference"/>
     </declare-styleable>
 </resources>
