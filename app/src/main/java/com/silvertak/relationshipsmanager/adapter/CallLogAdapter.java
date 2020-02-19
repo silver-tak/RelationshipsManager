@@ -11,6 +11,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
+import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.MostContactRankingItemBinding;
 
@@ -63,9 +64,9 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomVi
             this.mBinding = binding;
         }
 
-        void bind(PersonRelationshipInfo info)
+        void bind(CallLogInfo info)
         {
-            mBinding.setPersonRelationshipInfo(info);
+            //mBinding.setPersonRelationshipInfo(info);
         }
     }
 }
