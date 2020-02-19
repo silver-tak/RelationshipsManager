@@ -2,32 +2,17 @@ package com.silvertak.relationshipsmanager.fragment;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.ContactRankingAdapter;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
-import com.silvertak.relationshipsmanager.data.CallLogInfo;
-import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
 import com.silvertak.relationshipsmanager.define.StringDefine;
@@ -35,8 +20,6 @@ import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.view.DetailTransparentActivity;
 import com.silvertak.relationshipsmanager.viewmodel.StatusViewModel;
-
-import java.util.ArrayList;
 
 public class StatusFragment extends BaseFragment {
 
@@ -51,7 +34,7 @@ public class StatusFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

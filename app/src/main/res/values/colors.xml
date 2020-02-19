@@ -4,6 +4,7 @@
     <color name="background">#252D40</color>
     <color name="light_background">#4e566b</color>
     <color name="fontColor">#ECF4FF</color>
+    <color name="thickFontColor">#bac1cc</color>
     <color name="pointColor">#FEE300</color>
     <color name="black">#000000</color>
     <color name="transparentBlack">#96000000</color>

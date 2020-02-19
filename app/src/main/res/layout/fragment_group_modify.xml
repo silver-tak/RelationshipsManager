@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.GroupModifyFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="GroupModifyViewModel"
+            type="com.silvertak.relationshipsmanager.viewmodel.GroupModifyViewModel" />
+    </data>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".fragment.GroupModifyFragment">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="@string/add_group"
+                    android:textSize="20dp"
+                    android:textColor="@color/background"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    app:normalBackgroundResource="@drawable/group_item_background"
+                    app:clickedBackgroundResource="@drawable/group_item_clicked_background"/>
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@mipmap/plus"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"/>
+            </RelativeLayout>
 
-</FrameLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>
