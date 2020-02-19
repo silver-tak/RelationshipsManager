@@ -2,13 +2,13 @@
 <layout>
     <data>
         <variable
-            name="PersonRelationshipInfo"
-            type="com.silvertak.relationshipsmanager.data.PersonRelationshipInfo" />
+            name="CallLogInfo"
+            type="com.silvertak.relationshipsmanager.data.CallLogInfo" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:contact="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/tools"
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,70 +19,20 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/fontColor">
-            <LinearLayout
-                android:id="@+id/profileIvLayout"
-                android:layout_width="80dp"
+            <com.silvertak.relationshipsmanager.customView.CallTypeCustomView
+                android:id="@+id/callTypeView"
+                android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:gravity="center"
-                android:layout_alignParentStart="true">
-                <ImageView
-                    android:id="@+id/profileIv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    contact:photo="@{PersonRelationshipInfo.contactInfo.photoBitmap}"/>
-            </LinearLayout>
-            <LinearLayout
+                bind:callType="@{CallLogInfo.callType}"/>
+            <TextView
+                android:layout_toRightOf="@+id/callTypeView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/profileIvLayout"
-                android:layout_toLeftOf="@id/CountLayout"
-                android:weightSum="10"
-                android:layout_marginLeft="10dp"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/nameTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="5"
-                    android:textColor="@color/background"
-                    android:text="@{PersonRelationshipInfo.contactInfo.name}"
-                    android:singleLine="true"
-                    android:ellipsize="marquee"
-                    android:gravity="center_vertical"/>
-                <TextView
-                    android:id="@+id/phoneNumberTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="5"
-                    android:textColor="@color/background"
-                    android:text="@{PersonRelationshipInfo.contactInfo.phoneNumber}"
-                    android:gravity="center_vertical"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/CountLayout"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@{String.valueOf(PersonRelationshipInfo.callLogInfos.size())}"
-                    android:textSize="30dp"
-                    android:textColor="@color/background"/>
-                <TextView
-                    android:layout_marginLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="회"
-                    android:textSize="20dp"
-                    android:textColor="@color/background"/>
-            </LinearLayout>
+                android:ellipsize="marquee"
+                android:textColor="@color/background"
+                android:textSize="15dp"
+                android:text="@{CallLogInfo.callDateString}"
+                android:gravity="center" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

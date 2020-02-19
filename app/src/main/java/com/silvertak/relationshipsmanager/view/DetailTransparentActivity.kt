@@ -18,6 +18,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.silvertak.relationshipsmanager.R
+import com.silvertak.relationshipsmanager.adapter.CallLogAdapter
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo
 import com.silvertak.relationshipsmanager.databinding.ActivityDetailTransparentBinding
 import com.silvertak.relationshipsmanager.define.StringDefine
@@ -40,6 +41,7 @@ class DetailTransparentActivity : AppCompatActivity(), View.OnClickListener {
         mBindidng!!.detailTransparentActivity = this
         mBindidng!!.detailViewModel = mViewModel
         mBindidng!!.personRelationshipInfo = mViewModel!!.personRelationshipInfo
+        mBindidng!!.callLogRecyclerView.adapter = CallLogAdapter()
         mBindidng!!.lifecycleOwner = this
     }
 

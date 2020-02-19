@@ -25,7 +25,7 @@ public class DataCombineLib {
             {
                 String callLogPhoneNumber = StringLib.getOnlyNumber(callLogInfo.getPhoneNumber());
                 String contactInfoPhoneNumber = StringLib.getOnlyNumber(contactInfo.getPhoneNumber());
-                Log.i("combineContactWithCallLog", "ca : " + callLogPhoneNumber + ", co : " + contactInfoPhoneNumber);
+                //Log.i("combineContactWithCallLog", "ca : " + callLogPhoneNumber + ", co : " + contactInfoPhoneNumber);
                 if(callLogPhoneNumber.equals(contactInfoPhoneNumber))
                 {
                     info.addCallLogInfo(callLogInfo);

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
+import android.util.Log;
 
 import com.silvertak.relationshipsmanager.data.CallLogInfo;
 
@@ -80,6 +81,8 @@ public class CallLogLib {
             String callDate = managedCursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
             String callDuration = managedCursor.getString(duration);    // sec
+
+            Log.i("callLog", "type : " + callType + ", number : " + phNumber);
 
             callLogInfos.add(new CallLogInfo(phNumber, Integer.valueOf(callType), callDayTime, Integer.valueOf(callDuration)));
         }

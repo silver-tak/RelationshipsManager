@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
 import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.databinding.CallLogItemBinding;
 import com.silvertak.relationshipsmanager.databinding.MostContactRankingItemBinding;
 
 public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomViewHolder> {
@@ -23,7 +24,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomVi
     {
     }
 
-    public void setContactInfos(PersonRelationshipInfo info)
+    public void setPersonRelationshipInfo(PersonRelationshipInfo info)
     {
         this.personRelationshipInfo = info;
         this.notifyDataSetChanged();
@@ -45,8 +46,8 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomVi
     @NonNull
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        MostContactRankingItemBinding contactRankingItemBinding = MostContactRankingItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new CustomViewHolder(contactRankingItemBinding);
+        CallLogItemBinding callLogItemBinding = CallLogItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new CustomViewHolder(callLogItemBinding);
     }
 
     @Override
@@ -56,9 +57,9 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomVi
 
     class CustomViewHolder extends RecyclerView.ViewHolder
     {
-        private MostContactRankingItemBinding mBinding;
+        private CallLogItemBinding mBinding;
 
-        public CustomViewHolder(MostContactRankingItemBinding binding)
+        public CustomViewHolder(CallLogItemBinding binding)
         {
             super(binding.getRoot());
             this.mBinding = binding;
@@ -66,7 +67,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.CustomVi
 
         void bind(CallLogInfo info)
         {
-            //mBinding.setPersonRelationshipInfo(info);
+            mBinding.setCallLogInfo(info);
         }
     }
 }

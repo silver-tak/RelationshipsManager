@@ -6,6 +6,9 @@
     xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
+            name="CustomBindingAdapter"
+            type="com.silvertak.relationshipsmanager.adapter.CustomBindingAdapter" />
+        <variable
             name="vm"
             type="com.silvertak.relationshipsmanager.viewmodel.StatusViewModel" />
     </data>
@@ -99,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                bind:item="@{vm.mostContactRankingList}"/>
+                bind:contactRankingItem="@{vm.mostContactRankingList}"/>
         </RelativeLayout>
 
 

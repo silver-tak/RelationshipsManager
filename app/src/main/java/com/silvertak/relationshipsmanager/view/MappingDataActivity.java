@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.silvertak.relationshipsmanager.R;
+import com.silvertak.relationshipsmanager.customInterface.ThreadCallBack;
 import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipArray;
@@ -14,6 +15,7 @@ import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.library.CallLogLib;
 import com.silvertak.relationshipsmanager.library.ContactsLib;
 import com.silvertak.relationshipsmanager.library.DataCombineLib;
+import com.silvertak.relationshipsmanager.thread.ContactThread;
 
 import java.util.ArrayList;
 

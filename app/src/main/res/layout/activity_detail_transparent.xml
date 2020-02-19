@@ -3,8 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:contact="http://schemas.android.com/tools">
+    xmlns:contact="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/tools">
     <data>
+
         <variable
             name="DetailViewModel"
             type="com.silvertak.relationshipsmanager.viewmodel.DetailTransparentViewModel" />
@@ -46,21 +48,49 @@
                     android:layout_height="60dp"
                     android:layout_alignParentStart="true"
                     contact:photo="@{PersonRelationshipInfo.contactInfo.photoBitmap}"/>
-                <TextView
+                <LinearLayout
                     android:layout_toRightOf="@+id/profileIv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
-                    android:text="@{PersonRelationshipInfo.contactInfo.name}"
-                    android:textSize="15dp"
-                    android:textColor="@color/fontColor"
-                    android:ellipsize="marquee"
-                    android:gravity="center_vertical"
-                    android:maxLines="2"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:orientation="vertical"
+                    android:weightSum="2">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@{PersonRelationshipInfo.contactInfo.name}"
+                        android:textSize="15dp"
+                        android:textColor="@color/fontColor"
+                        android:ellipsize="marquee"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"/>
+                    <TextView
+                        android:layout_toRightOf="@+id/profileIv"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="@{PersonRelationshipInfo.contactInfo.phoneNumber}"
+                        android:textSize="15dp"
+                        android:textColor="@color/fontColor"
+                        android:ellipsize="marquee"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"/>
+                </LinearLayout>
+
             </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/callLogRecyclerView"
+                android:layout_below="@id/profileLayout"
+                android:layout_above="@+id/functionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                bind:callLogItem="@{PersonRelationshipInfo}"/>
             <LinearLayout
                 android:id="@+id/functionLayout"
                 android:layout_width="match_parent"
