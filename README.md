@@ -20,7 +20,7 @@ Java + Kotlin (Only Native)
 Mvvm
 
 ***
-<h3>Library & API</h3>
+<h3>Library & API & Tech</h3>
 
 1. CustomView
 2. LiveData
