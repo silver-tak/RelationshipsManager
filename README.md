@@ -22,19 +22,20 @@ Mvvm
 ***
 <h3>Library & API</h3>
 
-1. LiveData
-2. Observable
-3. DataBinding
-4. BindingAdapter
-5. TedPermission(https://github.com/ParkSangGwon/TedPermission)
-6. Glide(https://github.com/bumptech/glide)
-7. Viewpager
-8. RecyclerView
-9. CardView
-10. Fragment
+1. CustomView
+2. LiveData
+3. Observable
+4. DataBinding
+5. BindingAdapter
+6. TedPermission(https://github.com/ParkSangGwon/TedPermission)
+7. Glide(https://github.com/bumptech/glide)
+8. Viewpager
+9. RecyclerView
+10. CardView
+11. Fragment
 
-11. JobScheduler(Expected)
-12. FCM or Notification(Expected)
-13. Crashlytics(Expected)
+12. JobScheduler(Expected)
+13. FCM or Notification(Expected)
+14. Crashlytics(Expected)
 
 ***
