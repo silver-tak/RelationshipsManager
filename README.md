@@ -2,7 +2,9 @@
 
 ><h4>현대인의 인간관계를 유지시키기 위한 연락 주기를 통보함으로써 인관관계를 유지하는데 필요한 시간과 노력을 감소시키는 Application</h4>
 
-<img src="https://i.imgur.com/7jorDor.jpg" width="50%" height="50%">
+<div>
+<img src="https://i.imgur.com/7jorDor.jpg" width="36%" height="36%">　<img src="https://i.imgur.com/w7Q3gEX.jpg" width="36%" height="36%">
+</div>
 
 ***
 <h3>Application Structure</h3>
@@ -20,21 +22,22 @@ Java + Kotlin (Only Native)
 Mvvm
 
 ***
-<h3>Library & API</h3>
+<h3>Library & API & Tech Stack</h3>
 
-1. LiveData
-2. Observable
-3. DataBinding
-4. BindingAdapter
-5. TedPermission(https://github.com/ParkSangGwon/TedPermission)
-6. Glide(https://github.com/bumptech/glide)
-7. Viewpager
-8. RecyclerView
-9. CardView
-10. Fragment
+1. CustomView
+2. LiveData
+3. Observable
+4. DataBinding
+5. BindingAdapter
+6. TedPermission(https://github.com/ParkSangGwon/TedPermission)
+7. Glide(https://github.com/bumptech/glide)
+8. Viewpager
+9. RecyclerView
+10. CardView
+11. Fragment
 
-11. JobScheduler(Expected)
-12. FCM(Expected)
-13. Crashlytics(Expected)
+12. JobScheduler(Expected)
+13. FCM or Notification(Expected)
+14. Crashlytics(Expected)
 
 ***
