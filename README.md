@@ -34,7 +34,7 @@ Mvvm
 10. Fragment
 
 11. JobScheduler(Expected)
-12. FCM(Expected)
+12. FCM or Notification(Expected)
 13. Crashlytics(Expected)
 
 ***
