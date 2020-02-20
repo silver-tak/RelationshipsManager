@@ -15,7 +15,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.StatusFragment">
+        tools:context=".view.fragment.StatusFragment">
         <LinearLayout
             android:id="@+id/ScoreStatusLayout"
             android:background="@drawable/card_navy_background"

@@ -3,15 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--<data>
+    <data>
         <variable
-            name=""
-            type="" />
-    </data>-->
+            name="SelectManagingPersonViewModel"
+            type="com.silvertak.relationshipsmanager.viewmodel.SelectManagingPersonViewModel" />
+        <variable
+            name="SelectManagingPersonActivity"
+            type="com.silvertak.relationshipsmanager.view.SelectManagingPersonActivity" />
+    </data>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.SelectManagingPersonActivity">
 
+        <com.silvertak.relationshipsmanager.customView.SearchEditTextView
+            android:id="@+id/searchEditTextView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"/>
     </LinearLayout>
 </layout>

@@ -1,17 +1,13 @@
-package com.silvertak.relationshipsmanager.fragment;
+package com.silvertak.relationshipsmanager.view.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.silvertak.relationshipsmanager.R;
-import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
+import com.silvertak.relationshipsmanager.view.fragment.base.BaseFragment;
 
 public class SettingFragment extends BaseFragment {
 

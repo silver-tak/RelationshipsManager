@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager.fragment.base;
+package com.silvertak.relationshipsmanager.view.fragment.base;
 
 
 import android.os.Bundle;

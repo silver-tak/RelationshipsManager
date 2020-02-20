@@ -7,10 +7,10 @@ import android.os.Bundle
 import com.silvertak.relationshipsmanager.R
 import com.silvertak.relationshipsmanager.adapter.BaseFragmentViewPagerAdapter
 import com.silvertak.relationshipsmanager.databinding.ActivityMainBinding
-import com.silvertak.relationshipsmanager.fragment.GroupModifyFragment
-import com.silvertak.relationshipsmanager.fragment.SettingFragment
-import com.silvertak.relationshipsmanager.fragment.StatusFragment
-import com.silvertak.relationshipsmanager.fragment.base.BaseFragment
+import com.silvertak.relationshipsmanager.view.fragment.GroupModifyFragment
+import com.silvertak.relationshipsmanager.view.fragment.SettingFragment
+import com.silvertak.relationshipsmanager.view.fragment.StatusFragment
+import com.silvertak.relationshipsmanager.view.fragment.base.BaseFragment
 import com.silvertak.relationshipsmanager.viewmodel.MainViewModel
 
 import java.util.ArrayList
@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
         mFragmentTitleArrayList.add("설정")
 
         baseFragmentViewPagerAdapter = BaseFragmentViewPagerAdapter(supportFragmentManager)
-        baseFragmentViewPagerAdapter!!.setFragmentArrayList(mFragmentArrayList)
-        baseFragmentViewPagerAdapter!!.setFragmentTitleArrayList(mFragmentTitleArrayList)
-        mainBinding!!.viewPager.adapter = baseFragmentViewPagerAdapter
+        baseFragmentViewPagerAdapter.setFragmentArrayList(mFragmentArrayList)
+        baseFragmentViewPagerAdapter.setFragmentTitleArrayList(mFragmentTitleArrayList)
+        mainBinding.viewPager.adapter = baseFragmentViewPagerAdapter
     }
 
 

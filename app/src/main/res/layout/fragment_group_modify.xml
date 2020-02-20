@@ -2,6 +2,9 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
+            name="GroupModifyFragment"
+            type="com.silvertak.relationshipsmanager.view.fragment.GroupModifyFragment" />
+        <variable
             name="GroupModifyViewModel"
             type="com.silvertak.relationshipsmanager.viewmodel.GroupModifyViewModel" />
     </data>
@@ -9,15 +12,18 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.GroupModifyFragment">
+        tools:context=".view.fragment.GroupModifyFragment">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="20dp">
             <RelativeLayout
+                android:id="@+id/addGroupLayout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp">
+                android:layout_height="60dp"
+                android:onClick="@{GroupModifyFragment::onClick}">
                 <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                    android:id="@+id/addGroupBtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="@string/add_group"

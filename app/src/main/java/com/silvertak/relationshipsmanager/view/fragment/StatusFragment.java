@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager.fragment;
+package com.silvertak.relationshipsmanager.view.fragment;
 
 import android.animation.ValueAnimator;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding;
 import com.silvertak.relationshipsmanager.define.StringDefine;
-import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
+import com.silvertak.relationshipsmanager.view.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.view.DetailTransparentActivity;
 import com.silvertak.relationshipsmanager.viewmodel.StatusViewModel;

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.silvertak.relationshipsmanager.fragment.base.BaseFragment;
+import com.silvertak.relationshipsmanager.view.fragment.base.BaseFragment;
 
 import java.util.ArrayList;
 
