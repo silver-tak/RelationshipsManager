@@ -94,8 +94,8 @@ public class BindingAdapter {
     @androidx.databinding.BindingAdapter({"bind:backgroundType"})
     public static void changePersonItemBackground(RelativeLayout rl, boolean bIsSelect)
     {
-        if(bIsSelect) rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.fontColor));
-        else rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.colorAccent));
+        if(bIsSelect) rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.hashtag));
+        else rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.fontColor));
     }
 
 

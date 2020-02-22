@@ -1,5 +1,6 @@
 package com.silvertak.relationshipsmanager.adapter;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,13 +28,13 @@ public class SelectablePersonListAdapter extends RecyclerView.Adapter<Selectable
     public void setContactInfos(ObservableArrayList<PersonRelationshipInfo> infos)
     {
         this.contactInfos = infos;
-        this.notifyDataSetChanged();
+        //this.notifyDataSetChanged();
     }
 
     public void setSelectInfos(ObservableArrayList<PersonRelationshipInfo> infos)
     {
         this.selectInfos = infos;
-        this.notifyDataSetChanged();
+        //this.notifyDataSetChanged();
     }
 
     public void setContactInfoClickListener(OnContactInfoClick contactInfoClick)
@@ -42,7 +43,7 @@ public class SelectablePersonListAdapter extends RecyclerView.Adapter<Selectable
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position)
+    public void onBindViewHolder(@NonNull final CustomViewHolder holder, final int position)
     {
         holder.bind(contactInfos.get(position));
         holder.mBinding.cardview.setOnClickListener(new View.OnClickListener() {
@@ -53,13 +54,17 @@ public class SelectablePersonListAdapter extends RecyclerView.Adapter<Selectable
                 if(contactInfos.get(position).getSelected().getValue())
                 {
                     info.setSelected(false);
+                    holder.setSelectValue(false);
                     if(selectInfos.contains(info)) selectInfos.remove(info);
                 }
                 else
                 {
                     info.setSelected(true);
+                    holder.setSelectValue(true);
                     selectInfos.add(info);
                 }
+
+                //holder.itemView.requestLayout();
             }
         });
         setAnimation(holder.itemView);
@@ -85,29 +90,6 @@ public class SelectablePersonListAdapter extends RecyclerView.Adapter<Selectable
 
     @Override
     public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-        if(e.getAction() == MotionEvent.ACTION_UP)
-        {
-            View childView = rv.findChildViewUnder(e.getX(), e.getY());
-            if(childView != null)
-            {
-                int currentPosition = rv.getChildAdapterPosition(childView);
-                if(contactInfos.size() > currentPosition)
-                {
-                    PersonRelationshipInfo info = contactInfos.get(currentPosition);
-                    if(contactInfos.get(currentPosition).getSelected().getValue())
-                    {
-                        info.setSelected(false);
-                        if(selectInfos.contains(info)) selectInfos.remove(info);
-                    }
-                    else
-                    {
-                        info.setSelected(true);
-                        selectInfos.add(info);
-                    }
-                }
-            }
-        }
-
         return true;
     }
 
@@ -131,6 +113,13 @@ public class SelectablePersonListAdapter extends RecyclerView.Adapter<Selectable
 
         void bind(PersonRelationshipInfo info)
         {
+            mBinding.setPersonRelationshipInfo(info);
+        }
+
+        void setSelectValue(boolean bValue)
+        {
+            PersonRelationshipInfo info = mBinding.getPersonRelationshipInfo();
+            info.setSelected(bValue);
             mBinding.setPersonRelationshipInfo(info);
         }
     }
