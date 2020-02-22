@@ -8,23 +8,23 @@ import androidx.appcompat.widget.AppCompatTextView
 
 import com.silvertak.relationshipsmanager.R
 
-class ClickSwitchBackgroundColorTextView : AppCompatTextView, View.OnTouchListener {
+class ClickSwitchBackgroundTextView : AppCompatTextView, View.OnTouchListener {
 
     private var nNormalColorId: Int = 0
     private var nClickedColorId: Int = 0
     private var nNormalBackgroundResourceId: Int = 0
     private var nClickedBackgroundResourceId: Int = 0
     private var onClickListener: OnClickListener? = null
+    private var isSwitchOn: Boolean = false
 
     constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+            nNormalColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundColor, 0)
+            nClickedColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundColor, 0)
 
-            nNormalColorId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchBackgroundColorTextView).getResourceId(R.styleable.ClickSwitchBackgroundColorTextView_normalBackgroundColor, 0)
-            nClickedColorId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchBackgroundColorTextView).getResourceId(R.styleable.ClickSwitchBackgroundColorTextView_clickedBackgroundColor, 0)
-
-            nNormalBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchBackgroundColorTextView).getResourceId(R.styleable.ClickSwitchBackgroundColorTextView_normalBackgroundResource, 0)
-            nClickedBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchBackgroundColorTextView).getResourceId(R.styleable.ClickSwitchBackgroundColorTextView_clickedBackgroundResource, 0)
+            nNormalBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundResource, 0)
+            nClickedBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundResource, 0)
 
         this.setOnTouchListener(this)
         setNormal(context)
@@ -35,16 +35,23 @@ class ClickSwitchBackgroundColorTextView : AppCompatTextView, View.OnTouchListen
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        if (motionEvent.action == MotionEvent.ACTION_DOWN || motionEvent.action == MotionEvent.ACTION_MOVE)
+        /*if (motionEvent.action == MotionEvent.ACTION_DOWN || motionEvent.action == MotionEvent.ACTION_MOVE)
             setClicked(view.context)
         else {
             setNormal(view.context)
             if (onClickListener != null) onClickListener!!.onClick(view)
-        }
+        }*/
+        if(motionEvent.action == MotionEvent.ACTION_UP) switchBackground(view.context)
         return true
     }
 
+    private fun switchBackground(context: Context) {
+        if(isSwitchOn) { setNormal(context) } else { setClicked(context) }
+    }
+
     private fun setNormal(context: Context) {
+        isSwitchOn = false
+
         if (nNormalColorId != 0)
             setBackgroundColor(context.resources.getColor(nNormalColorId))
         else
@@ -52,6 +59,8 @@ class ClickSwitchBackgroundColorTextView : AppCompatTextView, View.OnTouchListen
     }
 
     private fun setClicked(context: Context) {
+        isSwitchOn = true
+
         if (nClickedColorId != 0)
             setBackgroundColor(context.resources.getColor(nClickedColorId))
         else

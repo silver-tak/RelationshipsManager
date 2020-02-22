@@ -100,7 +100,7 @@
                     android:layout_height="50dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
-                    <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                    <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
                         android:id="@+id/sendSmsBtn"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -112,7 +112,7 @@
                         android:textSize="15dp"
                         android:gravity="center"
                         android:onClick="@{DetailTransparentActivity::onClick}"/>
-                    <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                    <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
                         android:id="@+id/sendPrefixSmsBtn"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
@@ -125,7 +125,7 @@
                         android:gravity="center"
                         android:onClick="@{DetailTransparentActivity::onClick}"/>
                 </LinearLayout>
-                <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
                     android:id="@+id/callBtn"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

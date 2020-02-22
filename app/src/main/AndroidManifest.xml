@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.DetailTransparentActivity"
-            android:theme="@style/Theme.Transparent"></activity>
-        <activity android:name=".view.SelectManagingPersonActivity" />
+            android:theme="@style/Theme.Transparent"/>
+        <activity android:name=".view.SelectManagingPersonActivity"
+            android:theme="@style/Theme.Transparent"/>
         <activity android:name=".view.MappingDataActivity" />
         <activity android:name=".view.SplashActivity">
             <intent-filter>

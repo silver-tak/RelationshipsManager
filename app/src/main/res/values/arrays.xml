@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="contactTermArray">
+        <item>1일 마다 알림</item>
+        <item>3일 마다 알림</item>
+        <item>5일 마다 알림</item>
+        <item>7일 마다 알림</item>
+        <item>14일 마다 알림</item>
+        <item>21일 마다 알림</item>
+        <item>30일 마다 알림</item>
+    </string-array>
+</resources>

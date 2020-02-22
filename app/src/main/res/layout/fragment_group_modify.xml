@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:onClick="@{GroupModifyFragment::onClick}">
-                <com.silvertak.relationshipsmanager.customView.ClickSwitchBackgroundColorTextView
+                <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
                     android:id="@+id/addGroupBtn"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -41,8 +41,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"/>
             </RelativeLayout>
-
-
         </RelativeLayout>
     </RelativeLayout>
 </layout>

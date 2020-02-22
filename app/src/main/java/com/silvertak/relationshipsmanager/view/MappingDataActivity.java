@@ -12,6 +12,7 @@ import com.silvertak.relationshipsmanager.data.CallLogInfo;
 import com.silvertak.relationshipsmanager.data.ContactInfo;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipArray;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.define.StringDefine;
 import com.silvertak.relationshipsmanager.library.CallLogLib;
 import com.silvertak.relationshipsmanager.library.ContactsLib;
 import com.silvertak.relationshipsmanager.library.DataCombineLib;
@@ -55,7 +56,7 @@ public class MappingDataActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("contactInfos", contactInfos);
                     bundle.putParcelableArrayList("callLogInfos", callLogInfos);
-                    bundle.putParcelableArrayList("personRelationships", personRelationshipInfos);
+                    bundle.putParcelableArrayList(StringDefine.KEY_PERSON_RELATIONSHIP_INFO_ARRAY, personRelationshipInfos);
 
                     dialog.dismiss();
                     startNextActivity(bundle);

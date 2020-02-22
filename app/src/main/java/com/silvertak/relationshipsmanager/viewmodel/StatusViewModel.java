@@ -14,27 +14,11 @@ import com.silvertak.relationshipsmanager.library.DataCombineLib;
 
 import java.util.ArrayList;
 
-public class StatusViewModel extends ViewModel {
+public class StatusViewModel extends BaseViewModel {
 
     private MutableLiveData<Integer> relationshipScore = new MutableLiveData<>();
     private ObservableArrayList<PersonRelationshipInfo> mostContactRankingList = new ObservableArrayList<>();
     private ObservableArrayList<PersonRelationshipInfo> needContactRankingList = new ObservableArrayList<>();
-    private ArrayList<ContactInfo> contactInfos = new ArrayList<>();
-    private ArrayList<CallLogInfo> callLogInfos = new ArrayList<>();
-    private PersonRelationshipArray personRelationshipInfos = new PersonRelationshipArray();
-
-    public void setDataArrayList(Bundle bundle)
-    {
-        if(bundle.getParcelableArrayList("contactInfos") != null)
-            contactInfos = bundle.getParcelableArrayList("contactInfos");
-        if(bundle.getParcelableArrayList("callLogInfos") != null)
-            callLogInfos = bundle.getParcelableArrayList("callLogInfos");
-        if(bundle.getParcelableArrayList("personRelationships") != null)
-        {
-            ArrayList<PersonRelationshipInfo> array = bundle.getParcelableArrayList("personRelationships");
-            personRelationshipInfos = new PersonRelationshipArray(array);
-        }
-    }
 
     public void prepareVisibleData()
     {

@@ -7,6 +7,7 @@ import android.os.Bundle
 import com.silvertak.relationshipsmanager.R
 import com.silvertak.relationshipsmanager.adapter.BaseFragmentViewPagerAdapter
 import com.silvertak.relationshipsmanager.databinding.ActivityMainBinding
+import com.silvertak.relationshipsmanager.define.StringDefine
 import com.silvertak.relationshipsmanager.view.fragment.GroupModifyFragment
 import com.silvertak.relationshipsmanager.view.fragment.SettingFragment
 import com.silvertak.relationshipsmanager.view.fragment.StatusFragment
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //mainBinding!!.lifecycleOwner = this
 
         setTabLayoutStyle()
-        setFragmentAdapter()
+        setFragmentAdapter(intent.getBundleExtra("data"))
     }
 
     private fun setTabLayoutStyle() {
@@ -41,9 +42,7 @@ class MainActivity : AppCompatActivity() {
         mainBinding!!.tabLayout.setTabTextColors(resources.getColor(R.color.thickgray), resources.getColor(R.color.pointColor))
     }
 
-    private fun setFragmentAdapter() {
-        val args = intent.getBundleExtra("data")
-
+    private fun setFragmentAdapter(args: Bundle?) {
         mFragmentArrayList.add(StatusFragment.newInstance(args))
         mFragmentTitleArrayList.add("현황")
         mFragmentArrayList.add(GroupModifyFragment.newInstance(args))

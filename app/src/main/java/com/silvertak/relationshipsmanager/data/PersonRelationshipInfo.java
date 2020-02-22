@@ -3,12 +3,15 @@ package com.silvertak.relationshipsmanager.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 
 public class PersonRelationshipInfo implements Parcelable, Comparable{
 
     private ContactInfo mContactInfo;
     private ArrayList<CallLogInfo> mCallLogInfos = new ArrayList<>();
+    private MutableLiveData<Boolean> isSelected = new MutableLiveData<>();  // RecyclerView List의 항목일 때 선택되었는지 여부
 
     public PersonRelationshipInfo()
     {
@@ -52,6 +55,30 @@ public class PersonRelationshipInfo implements Parcelable, Comparable{
         this.mCallLogInfos.add(callLogInfo);
     }
 
+    public void setSelected(boolean bValue)
+    {
+        this.isSelected.setValue(bValue);
+    }
+
+    public MutableLiveData<Boolean> getSelected()
+    {
+        if(isSelected.getValue() == null)
+            isSelected.setValue(false);
+
+        return this.isSelected;
+    }
+
+    /**
+     * 2회 이상 연락한 전화번호인가?
+     * @return
+     */
+    public boolean hasBeenContactOver2Times()
+    {
+        if(mCallLogInfos.size() > 1)
+            return true;
+        else return false;
+    }
+
     protected PersonRelationshipInfo(Parcel in) {
         mContactInfo = in.readParcelable(ContactInfo.class.getClassLoader());
         mCallLogInfos = in.createTypedArrayList(CallLogInfo.CREATOR);
@@ -68,17 +95,6 @@ public class PersonRelationshipInfo implements Parcelable, Comparable{
             return new PersonRelationshipInfo[size];
         }
     };
-
-    /**
-     * 2회 이상 연락한 전화번호인가?
-     * @return
-     */
-    public boolean hasBeenContactOver2Times()
-    {
-        if(mCallLogInfos.size() > 1)
-            return true;
-        else return false;
-    }
 
     @Override
     public int describeContents() {

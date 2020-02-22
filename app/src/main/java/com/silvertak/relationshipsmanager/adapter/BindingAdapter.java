@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.provider.CallLog;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.databinding.ObservableArrayList;
@@ -72,6 +73,29 @@ public class BindingAdapter {
             case CallLog.Calls.MISSED_TYPE : break;
             default: break;
         }
+    }
+
+    @androidx.databinding.BindingAdapter({"bind:observablePersonItemList"})
+    public static void bindObservablePersonList(RecyclerView recyclerView, ObservableArrayList<PersonRelationshipInfo> infos)
+    {
+        SelectablePersonListAdapter adapter = (SelectablePersonListAdapter)recyclerView.getAdapter();
+        if(adapter != null)
+            adapter.setContactInfos(infos);
+    }
+
+    @androidx.databinding.BindingAdapter({"bind:observableSelectPersonItemList"})
+    public static void bindObservableSelectPersonList(RecyclerView recyclerView, ObservableArrayList<PersonRelationshipInfo> infos)
+    {
+        SelectablePersonListAdapter adapter = (SelectablePersonListAdapter)recyclerView.getAdapter();
+        if(adapter != null)
+            adapter.setSelectInfos(infos);
+    }
+
+    @androidx.databinding.BindingAdapter({"bind:backgroundType"})
+    public static void changePersonItemBackground(RelativeLayout rl, boolean bIsSelect)
+    {
+        if(bIsSelect) rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.fontColor));
+        else rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.colorAccent));
     }
 
 

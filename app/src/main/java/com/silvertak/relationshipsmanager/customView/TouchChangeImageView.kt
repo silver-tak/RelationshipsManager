@@ -4,12 +4,11 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.silvertak.relationshipsmanager.R
 
-class ClickSwitchImageView : AppCompatImageView, View.OnTouchListener {
+class TouchChangeImageView : AppCompatImageView, View.OnTouchListener {
 
     private var nNormalImageId: Int = 0
     private var nClickedImageId: Int = 0
@@ -21,8 +20,8 @@ class ClickSwitchImageView : AppCompatImageView, View.OnTouchListener {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         this.scaleType = ScaleType.FIT_CENTER
-        nNormalImageId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchImageView).getResourceId(R.styleable.ClickSwitchImageView_normalSrc, 0)
-        nClickedImageId = context.obtainStyledAttributes(attrs, R.styleable.ClickSwitchImageView).getResourceId(R.styleable.ClickSwitchImageView_clickedSrc, 0)
+        nNormalImageId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeImageView).getResourceId(R.styleable.TouchChangeImageView_normalSrc, 0)
+        nClickedImageId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeImageView).getResourceId(R.styleable.TouchChangeImageView_clickedSrc, 0)
         Glide.with(context).load(nNormalImageId).into(this)
 
         this.setOnTouchListener(this)
@@ -34,9 +33,9 @@ class ClickSwitchImageView : AppCompatImageView, View.OnTouchListener {
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         if (motionEvent.action == MotionEvent.ACTION_DOWN || motionEvent.action == MotionEvent.ACTION_MOVE)
-            Glide.with(view.context).load(nClickedImageId).into(view as ClickSwitchImageView)
+            Glide.with(view.context).load(nClickedImageId).into(view as TouchChangeImageView)
         else {
-            Glide.with(view.context).load(nNormalImageId).into(view as ClickSwitchImageView)
+            Glide.with(view.context).load(nNormalImageId).into(view as TouchChangeImageView)
             if (onClickListener != null) onClickListener!!.onClick(view)
         }
         return true
