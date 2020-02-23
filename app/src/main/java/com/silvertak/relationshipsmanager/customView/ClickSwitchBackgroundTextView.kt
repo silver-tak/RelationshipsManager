@@ -20,11 +20,11 @@ class ClickSwitchBackgroundTextView : AppCompatTextView, View.OnTouchListener {
     constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-            nNormalColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundColor, 0)
-            nClickedColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundColor, 0)
+        nNormalColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundColor, 0)
+        nClickedColorId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundColor, 0)
 
-            nNormalBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundResource, 0)
-            nClickedBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundResource, 0)
+        nNormalBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_normalBackgroundResource, 0)
+        nClickedBackgroundResourceId = context.obtainStyledAttributes(attrs, R.styleable.TouchChangeBackgroundColorTextView).getResourceId(R.styleable.TouchChangeBackgroundColorTextView_clickedBackgroundResource, 0)
 
         this.setOnTouchListener(this)
         setNormal(context)
@@ -35,12 +35,6 @@ class ClickSwitchBackgroundTextView : AppCompatTextView, View.OnTouchListener {
     }
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
-        /*if (motionEvent.action == MotionEvent.ACTION_DOWN || motionEvent.action == MotionEvent.ACTION_MOVE)
-            setClicked(view.context)
-        else {
-            setNormal(view.context)
-            if (onClickListener != null) onClickListener!!.onClick(view)
-        }*/
         if(motionEvent.action == MotionEvent.ACTION_UP) switchBackground(view.context)
         return true
     }

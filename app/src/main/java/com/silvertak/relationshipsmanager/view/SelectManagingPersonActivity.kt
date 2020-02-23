@@ -15,6 +15,8 @@ import com.silvertak.relationshipsmanager.adapter.SelectablePersonListAdapter
 import com.silvertak.relationshipsmanager.customInterface.SearchTextListener
 import com.silvertak.relationshipsmanager.databinding.ActivitySelectManagingPersonBinding
 import com.silvertak.relationshipsmanager.define.StringDefine
+import com.silvertak.relationshipsmanager.library.SharedPreferencesLib
+import com.silvertak.relationshipsmanager.library.StringLib
 import com.silvertak.relationshipsmanager.viewmodel.SelectManagingPersonViewModel
 
 class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
@@ -32,8 +34,6 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         mBinding.selectManagingPersonActivity = this
         mBinding.selectManagingPersonViewModel = mViewModel
 
-        mBinding.searchEditTextView.mSearchTextListener = SearchTextListener{strValue: String? -> Log.i("SelectManagingPerson", "텍스트감지 : $strValue")}
-
         mBinding.contactTermSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.contactTermArray))
         mBinding.contactTermSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -43,9 +43,11 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         }
-
         mBinding.contactTermSpinner.setSelection(3, true)
-        mBinding.selectablePersonList.adapter = SelectablePersonListAdapter()
+
+        val recyclerViewAdapter = SelectablePersonListAdapter(this)
+        mBinding.selectablePersonList.adapter = recyclerViewAdapter
+        mBinding.searchEditTextView.mSearchTextListener = SearchTextListener{strValue: String? -> recyclerViewAdapter.executeSearch(strValue)}
 
         mBinding.selectManagingPersonViewModel = mViewModel
         mBinding.lifecycleOwner = this
@@ -63,9 +65,22 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
             R.id.confirmBtn -> {
+                executeSaveGroup()
                 finish()
             }
             else -> {}
+        }
+    }
+
+    fun executeSaveGroup()
+    {
+        var selectedGroup = mViewModel.observableSelectedPersonRelationshpInfos
+        if(selectedGroup.size != 0)
+        {
+            SharedPreferencesLib(this).saveGroupData(
+                    StringLib.getGroupName(mBinding.groupNameEditText.text.toString(), mBinding.contactTermSpinner.selectedItem.toString()),
+                    mBinding.contactTermSpinner.selectedItem.toString(),
+                    selectedGroup)
         }
     }
 }

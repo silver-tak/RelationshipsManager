@@ -25,19 +25,50 @@
             android:layout_margin="40dp"
             android:background="@drawable/card_navy_background">
             <TextView
+                android:id="@+id/groupNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="그룹 이름을 입력하세요"
+                android:textSize="15dp"
+                android:textColor="@color/fontColor"
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"/>
+            <EditText
+                android:id="@+id/groupNameEditText"
+                android:layout_below="@+id/groupNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:paddingLeft="20dp"
+                android:hint="그룹 이름을 입력하세요"
+                android:background="@drawable/card_white_background"/>
+            <TextView
                 android:id="@+id/selectGuideTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/groupNameEditText"
                 android:text="연락주기를 관리할 사람을 선택하세요."
                 android:textSize="15dp"
                 android:textColor="@color/fontColor"
                 android:gravity="center_vertical"
-                android:layout_margin="20dp"/>
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"/>
             <com.silvertak.relationshipsmanager.customView.SearchEditTextView
                 android:id="@+id/searchEditTextView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_margin="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
                 android:paddingLeft="20dp"
                 android:layout_below="@+id/selectGuideTv"
                 android:hint="이름으로 검색"
