@@ -98,5 +98,11 @@ public class BindingAdapter {
         else rl.setBackgroundColor(rl.getContext().getResources().getColor(R.color.fontColor));
     }
 
+    @androidx.databinding.BindingAdapter({"bind:groupInfo_memberCount"})
+    public static void setGroupInfoMemberCount(TextView tv, int nCount)
+    {
+        tv.setText(nCount + "명");
+    }
+
 
 }

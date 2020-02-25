@@ -23,6 +23,7 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mViewModel: SelectManagingPersonViewModel
     private lateinit var mBinding: ActivitySelectManagingPersonBinding
+    private lateinit var recyclerViewAdapter: SelectablePersonListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,12 +46,16 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         }
         mBinding.contactTermSpinner.setSelection(3, true)
 
-        val recyclerViewAdapter = SelectablePersonListAdapter(this)
+        recyclerViewAdapter = SelectablePersonListAdapter(this)
         mBinding.selectablePersonList.adapter = recyclerViewAdapter
         mBinding.searchEditTextView.mSearchTextListener = SearchTextListener{strValue: String? -> recyclerViewAdapter.executeSearch(strValue)}
 
         mBinding.selectManagingPersonViewModel = mViewModel
         mBinding.lifecycleOwner = this
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun finish() {
@@ -78,7 +83,7 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         if(selectedGroup.size != 0)
         {
             SharedPreferencesLib(this).saveGroupData(
-                    StringLib.getGroupName(mBinding.groupNameEditText.text.toString(), mBinding.contactTermSpinner.selectedItem.toString()),
+                    StringLib.getGroupName(mBinding.groupNameEditText.text.toString()),
                     mBinding.contactTermSpinner.selectedItem.toString(),
                     selectedGroup)
         }

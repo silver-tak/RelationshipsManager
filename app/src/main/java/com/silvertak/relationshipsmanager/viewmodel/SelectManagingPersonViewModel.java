@@ -42,7 +42,6 @@ public class SelectManagingPersonViewModel extends BaseViewModel {
             @Override
             public void onItemRangeInserted(ObservableList<PersonRelationshipInfo> sender, int positionStart, int itemCount) {
                 Log.i("observer", sender.size() + "개");
-
             }
 
             @Override

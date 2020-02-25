@@ -41,6 +41,14 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"/>
             </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/groupListRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/addGroupLayout"
+                android:layout_marginTop="20dp"
+                android:background="@color/light_background"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
         </RelativeLayout>
     </RelativeLayout>
 </layout>

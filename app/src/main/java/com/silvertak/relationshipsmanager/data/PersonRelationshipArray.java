@@ -1,5 +1,7 @@
 package com.silvertak.relationshipsmanager.data;
 
+import com.silvertak.relationshipsmanager.library.StringLib;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,5 +32,18 @@ public class PersonRelationshipArray extends ArrayList<PersonRelationshipInfo> {
         }
 
         return resultArray;
+    }
+
+    public PersonRelationshipInfo getInfoById(String id)
+    {
+        for(PersonRelationshipInfo info : this)
+        {
+            if(!StringLib.isEmpty(info.getContactInfo().getId()) && info.getContactInfo().getId().equals(id))
+            {
+                return info;
+            }
+        }
+
+        return null;
     }
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="RelationshipGroupInfo"
+            type="com.silvertak.relationshipsmanager.data.RelationshipGroupInfo" />
+    </data>
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:contact="http://schemas.android.com/tools"
+        xmlns:bind="http://schemas.android.com/tools"
+        android:id="@+id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_background">
+            <RelativeLayout
+                android:id="@+id/groupInfoLayout"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/fontColor">
+                <TextView
+                    android:id="@+id/groupNamaTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="@{RelationshipGroupInfo.strGroupName}"
+                    android:textSize="20dp"
+                    android:textColor="@color/background"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    bind:groupInfo_memberCount="@{RelationshipGroupInfo.size()}"
+                    android:textSize="15dp"
+                    android:textColor="@color/background"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
+                    android:text="@{RelationshipGroupInfo.strGroupContactTerm}"
+                    android:textSize="15dp"
+                    android:textColor="@color/background"
+                    android:gravity="right|center_vertical"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_below="@+id/groupInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
+                    android:id="@+id/groupDeleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="그룹 삭제"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/groupModifyBtn"
+                    app:normalBackgroundResource="@drawable/group_modify_cancel_background"
+                    app:clickedBackgroundResource="@drawable/group_modify_cancel_clicked_background"/>
+                <com.silvertak.relationshipsmanager.customView.TouchChangeBackgroundColorTextView
+                    android:id="@+id/groupModifyBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:text="그룹 수정"
+                    android:textSize="15dp"
+                    android:textColor="@color/white"
+                    android:gravity="center_vertical"
+                    app:normalBackgroundResource="@drawable/group_modify_confirm_background"
+                    app:clickedBackgroundResource="@drawable/group_modify_confirm_clicked_background"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

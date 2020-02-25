@@ -14,10 +14,10 @@ public class StringLib {
         return strValue.replaceAll("[^0-9]", "");
     }
 
-    public static String getGroupName(String strText, String strTerm)
+    public static String getGroupName(String strText)
     {
         if(StringLib.isEmpty(strText))
-            return strTerm;
+            return "제목 없음";
         else return strText;
     }
 }

@@ -13,9 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.silvertak.relationshipsmanager.R;
+import com.silvertak.relationshipsmanager.adapter.GroupListAdapter;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentGroupModifyBinding;
 import com.silvertak.relationshipsmanager.define.StringDefine;
+import com.silvertak.relationshipsmanager.library.SharedPreferencesLib;
+import com.silvertak.relationshipsmanager.library.StringLib;
 import com.silvertak.relationshipsmanager.view.SelectManagingPersonActivity;
 import com.silvertak.relationshipsmanager.view.fragment.base.BaseFragment;
 import com.silvertak.relationshipsmanager.viewmodel.GroupModifyViewModel;
@@ -26,9 +29,9 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
 
     private GroupModifyViewModel groupModifyViewModel;
     private FragmentGroupModifyBinding mBinding;
+    private GroupListAdapter groupListAdapter;
 
     public GroupModifyFragment() {
-        // Required empty public constructor
     }
 
     public static GroupModifyFragment newInstance(Bundle args) {
@@ -43,8 +46,8 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         groupModifyViewModel = ViewModelProviders.of(this).get(GroupModifyViewModel.class);
         groupModifyViewModel.setDataArrayList(getArguments());
 
@@ -52,7 +55,18 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
         mBinding.setGroupModifyViewModel(groupModifyViewModel);
         mBinding.setGroupModifyFragment(this);
         mBinding.addGroupBtn.setOnClickListener(this);
+
+        groupListAdapter = new GroupListAdapter();
+        mBinding.groupListRecyclerView.setAdapter(groupListAdapter);
+
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        loadGroupData();
     }
 
     @Override
@@ -73,5 +87,21 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        loadGroupData();
+    }
+
+    private void loadGroupData()
+    {
+        String strGroupDataJson = new SharedPreferencesLib(getContext()).loadGroupData();
+        if(!StringLib.isEmpty(strGroupDataJson))
+        {
+            groupModifyViewModel.loadGroupInfoData(new SharedPreferencesLib(getContext()).loadGroupData());
+            groupListAdapter.setGroupInfos(groupModifyViewModel.getRelationshipGroupInfos());
+        }
+    }
+
+    private void deleteGroupData(String strGroupId)
+    {
+
     }
 }

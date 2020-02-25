@@ -34,10 +34,10 @@ public class SharedPreferencesLib {
             JsonObject jsonObject = new JsonObject();
 
             jsonObject.addProperty(JsonStringDefine.CONTACT.ID, info.getContactInfo().getId());
-            jsonObject.addProperty(JsonStringDefine.CONTACT.EMAIL, info.getContactInfo().getEmail());
-            jsonObject.addProperty(JsonStringDefine.CONTACT.NAME, info.getContactInfo().getName());
-            jsonObject.addProperty(JsonStringDefine.CONTACT.PHONE_NUMBER, info.getContactInfo().getPhoneNumber());
-            jsonObject.addProperty(JsonStringDefine.CONTACT.PHOTO_ID, info.getContactInfo().getPhotoId());
+            //jsonObject.addProperty(JsonStringDefine.CONTACT.EMAIL, info.getContactInfo().getEmail());
+            //jsonObject.addProperty(JsonStringDefine.CONTACT.NAME, info.getContactInfo().getName());
+            //jsonObject.addProperty(JsonStringDefine.CONTACT.PHONE_NUMBER, info.getContactInfo().getPhoneNumber());
+            //jsonObject.addProperty(JsonStringDefine.CONTACT.PHOTO_ID, info.getContactInfo().getPhotoId());
 
             groupDataArray.add(jsonObject);
         }
@@ -51,6 +51,11 @@ public class SharedPreferencesLib {
         jsonArray.add(groupObject);
 
         save(JsonStringDefine.GROUP.ARRAY, jsonArray.toString());
+    }
+
+    public String loadGroupData()
+    {
+        return load(JsonStringDefine.GROUP.ARRAY);
     }
 
     public void save(String strKey, String strDataValue)
