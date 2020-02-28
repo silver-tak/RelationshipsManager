@@ -8,6 +8,7 @@ public class JsonStringDefine
     public class GROUP
     {
         public static final String ARRAY = "GROUP_ARRAY";
+        public static final String ID = "GROUP_ID";
         public static final String DATA = "GROUP_DATA";
         public static final String NAME = "GROUP_NAME";
         public static final String TERM = "GROUP_TERM";

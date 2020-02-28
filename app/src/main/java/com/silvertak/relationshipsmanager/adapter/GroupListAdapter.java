@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.customInterface.ManagingGroupListener;
 import com.silvertak.relationshipsmanager.data.RelationshipGroupInfo;
 import com.silvertak.relationshipsmanager.databinding.ManageGroupInfoItemBinding;
-import com.silvertak.relationshipsmanager.databinding.MostContactRankingItemBinding;
 
 public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.CustomViewHolder> implements RecyclerView.OnItemTouchListener{
 
     private ObservableArrayList<RelationshipGroupInfo> groupInfos = new ObservableArrayList<>();
+    private ManagingGroupListener groupListener;
 
     public GroupListAdapter()
     {
@@ -30,13 +29,31 @@ public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.Cust
         notifyDataSetChanged();
     }
 
+    public void setManagingGroupListener(ManagingGroupListener listener)
+    {
+        this.groupListener = listener;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, final int position)
     {
         holder.bind(groupInfos.get(position));
-        holder.mBinding.cardview.setOnClickListener(new View.OnClickListener() {
+        holder.mBinding.groupInfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                groupListener.onInfoClick(groupInfos.get(position));
+            }
+        });
+        holder.mBinding.groupModifyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                groupListener.onModifyClick(groupInfos.get(position));
+            }
+        });
+        holder.mBinding.groupDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                groupListener.onDeleteClick(groupInfos.get(position));
             }
         });
         setAnimation(holder.itemView);

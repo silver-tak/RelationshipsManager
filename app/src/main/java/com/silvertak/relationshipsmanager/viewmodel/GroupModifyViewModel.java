@@ -31,10 +31,13 @@ public class GroupModifyViewModel extends BaseViewModel {
         {
             JsonObject jsonObject = (JsonObject)element;
 
+            String strGroupId = "";
             String strGroupName = "";
             String strGroupTerm = "";
             String strGroupData = "";
 
+            if(jsonObject.has(JsonStringDefine.GROUP.ID))
+                strGroupId = jsonObject.get(JsonStringDefine.GROUP.ID).getAsString();
             if(jsonObject.has(JsonStringDefine.GROUP.NAME))
                 strGroupName = jsonObject.get(JsonStringDefine.GROUP.NAME).getAsString();
             if(jsonObject.has(JsonStringDefine.GROUP.TERM))
@@ -42,7 +45,7 @@ public class GroupModifyViewModel extends BaseViewModel {
             if(jsonObject.has(JsonStringDefine.GROUP.DATA))
                 strGroupData = jsonObject.get(JsonStringDefine.GROUP.DATA).getAsString();
 
-            RelationshipGroupInfo relationshipInfo = new RelationshipGroupInfo(strGroupName, strGroupTerm, strGroupData, personRelationshipInfos);
+            RelationshipGroupInfo relationshipInfo = new RelationshipGroupInfo(strGroupId, strGroupName, strGroupTerm, strGroupData, personRelationshipInfos);
             relationshipGroupInfos.add(relationshipInfo);
         }
     }

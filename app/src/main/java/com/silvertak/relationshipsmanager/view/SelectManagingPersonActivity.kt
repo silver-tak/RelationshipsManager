@@ -82,7 +82,8 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         var selectedGroup = mViewModel.observableSelectedPersonRelationshpInfos
         if(selectedGroup.size != 0)
         {
-            SharedPreferencesLib(this).saveGroupData(
+            SharedPreferencesLib.getInstance(this).saveGroupData(
+                    System.currentTimeMillis().toString(),
                     StringLib.getGroupName(mBinding.groupNameEditText.text.toString()),
                     mBinding.contactTermSpinner.selectedItem.toString(),
                     selectedGroup)

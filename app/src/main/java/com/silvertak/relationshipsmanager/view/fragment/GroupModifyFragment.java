@@ -8,13 +8,17 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.adapter.GroupListAdapter;
+import com.silvertak.relationshipsmanager.customInterface.ManagingGroupListener;
+import com.silvertak.relationshipsmanager.customView.CustomDIalog;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.data.RelationshipGroupInfo;
 import com.silvertak.relationshipsmanager.databinding.FragmentGroupModifyBinding;
 import com.silvertak.relationshipsmanager.define.StringDefine;
 import com.silvertak.relationshipsmanager.library.SharedPreferencesLib;
@@ -57,6 +61,23 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
         mBinding.addGroupBtn.setOnClickListener(this);
 
         groupListAdapter = new GroupListAdapter();
+        groupListAdapter.setManagingGroupListener(new ManagingGroupListener() {
+            @Override
+            public void onInfoClick(RelationshipGroupInfo info) {
+                Log.i("ManagingGrroupListener", "onInfoClick called, " + info.getStrGroupName() + ", " + info.size());
+            }
+
+            @Override
+            public void onDeleteClick(RelationshipGroupInfo info) {
+                Log.i("ManagingGrroupListener", "onDeleteClick called, " + info.getStrGroupName() + ", " + info.size());
+                deleteGroupData(info.getStrGroupName(), info.getStrGroupId());
+            }
+
+            @Override
+            public void onModifyClick(RelationshipGroupInfo info) {
+                Log.i("ManagingGrroupListener", "onModifyClick called, " + info.getStrGroupName() + ", " + info.size());
+            }
+        });
         mBinding.groupListRecyclerView.setAdapter(groupListAdapter);
 
         return mBinding.getRoot();
@@ -92,16 +113,23 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
 
     private void loadGroupData()
     {
-        String strGroupDataJson = new SharedPreferencesLib(getContext()).loadGroupData();
+        String strGroupDataJson = SharedPreferencesLib.getInstance(getContext()).loadGroupData();
         if(!StringLib.isEmpty(strGroupDataJson))
         {
-            groupModifyViewModel.loadGroupInfoData(new SharedPreferencesLib(getContext()).loadGroupData());
+            groupModifyViewModel.loadGroupInfoData(SharedPreferencesLib.getInstance(getContext()).loadGroupData());
             groupListAdapter.setGroupInfos(groupModifyViewModel.getRelationshipGroupInfos());
         }
     }
 
-    private void deleteGroupData(String strGroupId)
+    private void deleteGroupData(String strGroupName, final String strGroupId)
     {
-
+        CustomDIalog customDIalog = new CustomDIalog(getActivity());
+        customDIalog.showYesOrNoDialog(String.format(getString(R.string.delete_msg), strGroupName), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferencesLib.getInstance(getContext()).deleteGroupData(strGroupId);
+                loadGroupData();
+            }
+        });
     }
 }

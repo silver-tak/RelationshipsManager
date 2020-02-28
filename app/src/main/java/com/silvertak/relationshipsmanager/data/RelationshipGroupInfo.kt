@@ -10,20 +10,23 @@ import com.silvertak.relationshipsmanager.define.JsonStringDefine
 
 class RelationshipGroupInfo: ArrayList<PersonRelationshipInfo> {
 
+    var strGroupId: String = ""
     var strGroupName: String = ""
     var strGroupContactTerm: String = ""
 
     constructor()
 
-    constructor(groupName: String, groupContactTerm: String, groupDataJsonString: String, personRelationshipInfos: PersonRelationshipArray)
+    constructor(groupId: String, groupName: String, groupContactTerm: String, groupDataJsonString: String, personRelationshipInfos: PersonRelationshipArray)
     {
+        strGroupId = groupId
         strGroupName = groupName
         strGroupContactTerm = groupContactTerm
         setArrayData(groupDataJsonString, personRelationshipInfos)
     }
 
-    constructor(groupName: String, groupContactTerm: String, groupData: ArrayList<PersonRelationshipInfo>)
+    constructor(groupId: String, groupName: String, groupContactTerm: String, groupData: ArrayList<PersonRelationshipInfo>)
     {
+        strGroupId = groupId
         strGroupName = groupName
         strGroupContactTerm = groupContactTerm
         setArrayData(groupData)

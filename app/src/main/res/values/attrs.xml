@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="TouchChangeTextColorTextView">
+        <attr name="normalTextColor" format="reference"/>
+        <attr name="clickedTextColor" format="reference"/>
+    </declare-styleable>
     <declare-styleable name="TouchChangeImageView">
         <attr name="normalSrc" format="reference"/>
         <attr name="clickedSrc" format="reference"/>

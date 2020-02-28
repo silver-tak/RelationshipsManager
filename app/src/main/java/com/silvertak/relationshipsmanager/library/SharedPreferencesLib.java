@@ -5,23 +5,38 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.ObservableArrayList;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.define.JsonStringDefine;
 
+import org.json.JSONObject;
 
 public class SharedPreferencesLib {
-    SharedPreferences objSharedPreferences;
+    public static SharedPreferencesLib singleTon;
+    public static SharedPreferencesLib getInstance(@Nullable Context context)
+    {
+        if(context != null)
+        {
+            singleTon = new SharedPreferencesLib(context);
+        }
+
+        return singleTon;
+    }
+
+    public SharedPreferences objSharedPreferences;
+
     public SharedPreferencesLib(Context context)
     {
         objSharedPreferences = context.getSharedPreferences(context.getPackageName(), Activity.MODE_PRIVATE);
     }
 
-    public void saveGroupData(String strGroupName, String strGroupContactTerm, ObservableArrayList<PersonRelationshipInfo> relationshipInfos)
+    public void saveGroupData(String strGroupId, String strGroupName, String strGroupContactTerm, ObservableArrayList<PersonRelationshipInfo> relationshipInfos)
     {
         JsonArray jsonArray = new JsonArray();
 
@@ -44,6 +59,7 @@ public class SharedPreferencesLib {
 
         JsonObject groupObject = new JsonObject();
 
+        groupObject.addProperty(JsonStringDefine.GROUP.ID, strGroupId);
         groupObject.addProperty(JsonStringDefine.GROUP.NAME, strGroupName);
         groupObject.addProperty(JsonStringDefine.GROUP.TERM, strGroupContactTerm);
         groupObject.addProperty(JsonStringDefine.GROUP.DATA, groupDataArray.toString());
@@ -56,6 +72,37 @@ public class SharedPreferencesLib {
     public String loadGroupData()
     {
         return load(JsonStringDefine.GROUP.ARRAY);
+    }
+
+    public void deleteGroupData(String strGroupId)
+    {
+        String jsonString = loadGroupData();
+
+        if(StringLib.isEmpty(jsonString))
+            return;
+
+        JsonArray jsonArray = (JsonArray)new JsonParser().parse(jsonString);
+
+        for(JsonElement element : jsonArray)
+        {
+            JsonObject jsonObject = (JsonObject) element;
+
+            if(jsonObject.has(JsonStringDefine.GROUP.ID))
+            {
+                if(jsonObject.get(JsonStringDefine.GROUP.ID).getAsString().equals(strGroupId))
+                {
+                    jsonArray.remove(element);
+                    break;
+                }
+            }
+        }
+
+        save(JsonStringDefine.GROUP.ARRAY, jsonArray.toString());
+    }
+
+    public void deleteAllGroupData()
+    {
+        save(JsonStringDefine.GROUP.ARRAY, "[]");
     }
 
     public void save(String strKey, String strDataValue)
