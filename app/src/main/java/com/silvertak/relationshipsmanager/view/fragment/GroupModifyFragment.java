@@ -65,6 +65,7 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onInfoClick(RelationshipGroupInfo info) {
                 Log.i("ManagingGrroupListener", "onInfoClick called, " + info.getStrGroupName() + ", " + info.size());
+                modifyGroupData(info.getStrGroupName(), info.getStrGroupId());
             }
 
             @Override
@@ -96,13 +97,23 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
         {
             case R.id.addGroupBtn :
                 Intent intent = new Intent(getActivity(), SelectManagingPersonActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList(StringDefine.KEY_PERSON_RELATIONSHIP_INFO_ARRAY, groupModifyViewModel.getPersonRelationshipInfos());
-                intent.putExtra(StringDefine.KEY_DEFAULT_BUNDLE_KEY, bundle);
-                startActivityForResult(intent, 1000);
-                getActivity().overridePendingTransition(R.anim.scale_zoom_in,0);
+                intent.putExtra(StringDefine.KEY_DEFAULT_BUNDLE_KEY, getOriginalPersonRelationshipInfoBundle());
+                startSelectManagingPersonActivity(intent, 1000);
                 break;
         }
+    }
+
+    private Bundle getOriginalPersonRelationshipInfoBundle()
+    {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(StringDefine.KEY_PERSON_RELATIONSHIP_INFO_ARRAY, groupModifyViewModel.getPersonRelationshipInfos());
+        return bundle;
+    }
+
+    private void startSelectManagingPersonActivity(Intent intent, int nRequestCode)
+    {
+        startActivityForResult(intent, nRequestCode);
+        getActivity().overridePendingTransition(R.anim.scale_zoom_in,0);
     }
 
     @Override
@@ -131,5 +142,10 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
                 loadGroupData();
             }
         });
+    }
+
+    private void modifyGroupData(String strGroupName, final String strGroupId)
+    {
+
     }
 }
