@@ -22,7 +22,7 @@ public class ContactsLib {
     /**
      * 주소록 정보 가져오기.
      */
-    public ArrayList<ContactInfo> contacts(){
+    public ArrayList<ContactInfo> getContacts(){
         ArrayList<ContactInfo> arrayList = new ArrayList<>();
 
         Cursor cursor = mActivity.managedQuery(
