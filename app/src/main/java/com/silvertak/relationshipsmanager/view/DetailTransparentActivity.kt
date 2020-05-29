@@ -1,22 +1,16 @@
 package com.silvertak.relationshipsmanager.view
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import android.widget.ImageView
+import androidx.databinding.ViewDataBinding
 
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.silvertak.relationshipsmanager.R
 import com.silvertak.relationshipsmanager.adapter.CallLogAdapter
 import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo
@@ -26,27 +20,30 @@ import com.silvertak.relationshipsmanager.viewmodel.DetailTransparentViewModel
 
 class DetailTransparentActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var mBindidng: ActivityDetailTransparentBinding
+    private lateinit var mBinding: ActivityDetailTransparentBinding
     private lateinit var mViewModel: DetailTransparentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_transparent)
 
-        mViewModel = ViewModelProviders.of(this).get(DetailTransparentViewModel::class.java)
-        if (intent.getParcelableExtra<Parcelable>(StringDefine.KEY_PERSON_RELATIONSHIP_INFO) != null)
-            mViewModel!!.personRelationshipInfo = intent.getParcelableExtra<Parcelable>(StringDefine.KEY_PERSON_RELATIONSHIP_INFO) as PersonRelationshipInfo?
+        ViewModelProviders.of(this).get(DetailTransparentViewModel::class.java).apply {
+            mViewModel = this
+            if (intent.getParcelableExtra<Parcelable>(StringDefine.KEY_PERSON_RELATIONSHIP_INFO) != null)
+                this.personRelationshipInfo = intent.getParcelableExtra<Parcelable>(StringDefine.KEY_PERSON_RELATIONSHIP_INFO) as PersonRelationshipInfo?
+        }
 
-        mBindidng = DataBindingUtil.setContentView(this, R.layout.activity_detail_transparent)
-        mBindidng!!.detailTransparentActivity = this
-        mBindidng!!.detailViewModel = mViewModel
-        mBindidng!!.personRelationshipInfo = mViewModel!!.personRelationshipInfo
-        mBindidng!!.callLogRecyclerView.adapter = CallLogAdapter()
-        mBindidng!!.lifecycleOwner = this
+        DataBindingUtil.setContentView<ActivityDetailTransparentBinding>(this, R.layout.activity_detail_transparent).apply{
+            detailTransparentActivity = this@DetailTransparentActivity
+            detailViewModel = mViewModel
+            personRelationshipInfo = mViewModel.personRelationshipInfo
+            callLogRecyclerView.adapter = CallLogAdapter()
+            mBinding = this
+        }
     }
 
-    override fun onClick(view: View) {
-        when (view.id) {
+    override fun onClick(view: View) = view?.let {
+        when (it.id) {
             R.id.transparentLayout -> finish()
             R.id.sendSmsBtn -> startActivity(Intent(Intent.ACTION_SENDTO, Uri.parse("sms:" + mViewModel!!.personRelationshipInfo.contactInfo.phoneNumber)))
             R.id.sendPrefixSmsBtn -> {
@@ -58,6 +55,7 @@ class DetailTransparentActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
 
     override fun finish() {
         super.finish()

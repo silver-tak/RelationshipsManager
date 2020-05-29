@@ -5,6 +5,7 @@ import com.silvertak.relationshipsmanager.library.StringLib;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.stream.Stream;
 
 public class PersonRelationshipArray extends ArrayList<PersonRelationshipInfo> {
 
@@ -27,7 +28,6 @@ public class PersonRelationshipArray extends ArrayList<PersonRelationshipInfo> {
         for(PersonRelationshipInfo info : this)
         {
             resultArray.add(info);
-
             //if(resultArray.size() == 5) break;
         }
 

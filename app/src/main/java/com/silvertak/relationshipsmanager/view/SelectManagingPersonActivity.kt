@@ -29,33 +29,30 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_managing_person)
 
-        mViewModel = ViewModelProviders.of(this).get(SelectManagingPersonViewModel::class.java)
-        mViewModel.setDataArrayList(intent.getBundleExtra(StringDefine.KEY_DEFAULT_BUNDLE_KEY))
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_select_managing_person)
-        mBinding.selectManagingPersonActivity = this
-        mBinding.selectManagingPersonViewModel = mViewModel
-
-        mBinding.contactTermSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.contactTermArray))
-        mBinding.contactTermSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-            }
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
+        mViewModel= ViewModelProviders.of(this).get(SelectManagingPersonViewModel::class.java).apply {
+            setDataArrayList(intent.getBundleExtra(StringDefine.KEY_DEFAULT_BUNDLE_KEY))
         }
-        mBinding.contactTermSpinner.setSelection(3, true)
+        mBinding = DataBindingUtil.setContentView<ActivitySelectManagingPersonBinding>(this, R.layout.activity_select_managing_person).apply {
+            selectManagingPersonActivity = this@SelectManagingPersonActivity
+            selectManagingPersonViewModel = mViewModel
+            contactTermSpinner.adapter = ArrayAdapter(this@SelectManagingPersonActivity, android.R.layout.simple_spinner_dropdown_item, resources.getStringArray(R.array.contactTermArray))
+            contactTermSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+            }
+            contactTermSpinner.setSelection(3, true)
+        }
 
         recyclerViewAdapter = SelectablePersonListAdapter(this)
-        mBinding.selectablePersonList.adapter = recyclerViewAdapter
-        mBinding.searchEditTextView.mSearchTextListener = SearchTextListener{strValue: String? -> recyclerViewAdapter.executeSearch(strValue)}
+        mBinding.apply {
+            selectablePersonList.adapter = recyclerViewAdapter
+            searchEditTextView.mSearchTextListener = SearchTextListener{strValue: String? -> recyclerViewAdapter.executeSearch(strValue)}
 
-        mBinding.selectManagingPersonViewModel = mViewModel
-        mBinding.lifecycleOwner = this
-    }
-
-    override fun onResume() {
-        super.onResume()
+            selectManagingPersonViewModel = mViewModel
+            lifecycleOwner = this@SelectManagingPersonActivity
+        }
     }
 
     override fun finish() {
@@ -77,16 +74,15 @@ class SelectManagingPersonActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun executeSaveGroup()
-    {
-        var selectedGroup = mViewModel.observableSelectedPersonRelationshpInfos
-        if(selectedGroup.size != 0)
-        {
-            SharedPreferencesLib.getInstance(this).saveGroupData(
-                    System.currentTimeMillis().toString(),
-                    StringLib.getGroupName(mBinding.groupNameEditText.text.toString()),
-                    mBinding.contactTermSpinner.selectedItem.toString(),
-                    selectedGroup)
+    private fun executeSaveGroup() = mViewModel.observableSelectedPersonRelationshpInfos.let {
+            if(it.size != 0)
+            {
+                SharedPreferencesLib.getInstance(this).saveGroupData(
+                        System.currentTimeMillis().toString(),
+                        StringLib.getGroupName(mBinding.groupNameEditText.text.toString()),
+                        mBinding.contactTermSpinner.selectedItem.toString(),
+                        it)
+            }
         }
-    }
+
 }

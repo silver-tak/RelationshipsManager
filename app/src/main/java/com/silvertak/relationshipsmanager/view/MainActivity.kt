@@ -20,41 +20,45 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
     private lateinit var mainViewModel: MainViewModel
-    private lateinit var baseFragmentViewPagerAdapter: BaseFragmentViewPagerAdapter
     private val mFragmentArrayList = ArrayList<BaseFragment>()
     private val mFragmentTitleArrayList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        mainViewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java!!)
-        mainBinding!!.vm = mainViewModel
-        //mainBinding!!.lifecycleOwner = this
+        mainViewModel = ViewModelProviders.of(this@MainActivity).get(MainViewModel::class.java)
+                .apply {
+                    mainBinding.vm = this
+                    mainBinding.lifecycleOwner = this@MainActivity
+                }
 
         setTabLayoutStyle()
         setFragmentAdapter(intent.getBundleExtra("data"))
     }
 
-    private fun setTabLayoutStyle() {
-        mainBinding!!.tabLayout.setupWithViewPager(mainBinding!!.viewPager)
-        mainBinding!!.tabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.background))
-        mainBinding!!.tabLayout.setTabTextColors(resources.getColor(R.color.thickgray), resources.getColor(R.color.pointColor))
+    private fun setTabLayoutStyle() =
+        mainBinding.tabLayout.run {
+            setupWithViewPager(mainBinding.viewPager)
+            setSelectedTabIndicatorColor(resources.getColor(R.color.background))
+            setTabTextColors(resources.getColor(R.color.thickgray), resources.getColor(R.color.pointColor))
+        }
+
+
+    private fun setFragmentAdapter(args: Bundle?) = args.apply {
+        mFragmentTitleArrayList.run {
+            add("현황")
+            add("그룹편집")
+            add("설정")
+        }
+        mFragmentArrayList.run {
+            add(StatusFragment.newInstance(args))
+            add(GroupModifyFragment.newInstance(args))
+            add(SettingFragment.newInstance(args))
+        }
+        BaseFragmentViewPagerAdapter(supportFragmentManager).run {
+            setFragmentTitleArrayList(mFragmentTitleArrayList)
+            setFragmentArrayList(mFragmentArrayList)
+            mainBinding.viewPager.adapter = this
+        }
     }
-
-    private fun setFragmentAdapter(args: Bundle?) {
-        mFragmentArrayList.add(StatusFragment.newInstance(args))
-        mFragmentTitleArrayList.add("현황")
-        mFragmentArrayList.add(GroupModifyFragment.newInstance(args))
-        mFragmentTitleArrayList.add("그룹 편집")
-        mFragmentArrayList.add(SettingFragment.newInstance(args))
-        mFragmentTitleArrayList.add("설정")
-
-        baseFragmentViewPagerAdapter = BaseFragmentViewPagerAdapter(supportFragmentManager)
-        baseFragmentViewPagerAdapter.setFragmentArrayList(mFragmentArrayList)
-        baseFragmentViewPagerAdapter.setFragmentTitleArrayList(mFragmentTitleArrayList)
-        mainBinding.viewPager.adapter = baseFragmentViewPagerAdapter
-    }
-
-
 }

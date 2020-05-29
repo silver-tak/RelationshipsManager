@@ -135,12 +135,9 @@ public class GroupModifyFragment extends BaseFragment implements View.OnClickLis
     private void deleteGroupData(String strGroupName, final String strGroupId)
     {
         CustomDIalog customDIalog = new CustomDIalog(getActivity());
-        customDIalog.showYesOrNoDialog(String.format(getString(R.string.delete_msg), strGroupName), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferencesLib.getInstance(getContext()).deleteGroupData(strGroupId);
-                loadGroupData();
-            }
+        customDIalog.showYesOrNoDialog(String.format(getString(R.string.delete_msg), strGroupName), view -> {
+            SharedPreferencesLib.getInstance(getContext()).deleteGroupData(strGroupId);
+            loadGroupData();
         });
     }
 

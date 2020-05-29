@@ -9,9 +9,7 @@ open class BaseActivity : AppCompatActivity() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    protected fun addDisposable(disposable: Disposable){
-        disposable?.let { compositeDisposable.add(disposable) }
-    }
+    protected fun addDisposable(disposable: Disposable) = disposable?.let { compositeDisposable.add(disposable) }
 
     override fun onStop() {
         super.onStop()
