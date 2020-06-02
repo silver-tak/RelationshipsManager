@@ -11,7 +11,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.silvertak.relationshipsmanager.customInterface.ManagingGroupListener;
-import com.silvertak.relationshipsmanager.data.RelationshipGroupInfo;
+import com.silvertak.relationshipsmanager.vo.RelationshipGroupInfo;
 import com.silvertak.relationshipsmanager.databinding.ManageGroupInfoItemBinding;
 
 public class GroupListAdapter extends RecyclerView.Adapter<GroupListAdapter.CustomViewHolder> implements RecyclerView.OnItemTouchListener{

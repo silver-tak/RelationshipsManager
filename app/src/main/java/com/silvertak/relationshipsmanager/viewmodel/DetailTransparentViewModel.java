@@ -2,7 +2,7 @@ package com.silvertak.relationshipsmanager.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 
 public class DetailTransparentViewModel extends ViewModel {
 

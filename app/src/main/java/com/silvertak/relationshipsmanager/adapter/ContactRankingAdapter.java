@@ -5,15 +5,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.TranslateAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.silvertak.relationshipsmanager.Consts;
 import com.silvertak.relationshipsmanager.customInterface.OnContactInfoClick;
-import com.silvertak.relationshipsmanager.data.ContactInfo;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.databinding.MostContactRankingItemBinding;
 
 public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAdapter.CustomViewHolder> implements RecyclerView.OnItemTouchListener{
@@ -51,7 +50,7 @@ public class ContactRankingAdapter extends RecyclerView.Adapter<ContactRankingAd
 
     private void setAnimation(View view) {
         AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(300);
+        anim.setDuration(Consts.FADE_ANIMATION_DURATION);
         view.startAnimation(anim);
     }
 

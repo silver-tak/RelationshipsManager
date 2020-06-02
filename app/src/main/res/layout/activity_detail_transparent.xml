@@ -11,7 +11,7 @@
             type="com.silvertak.relationshipsmanager.viewmodel.DetailTransparentViewModel" />
         <variable
             name="PersonRelationshipInfo"
-            type="com.silvertak.relationshipsmanager.data.PersonRelationshipInfo" />
+            type="com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo" />
         <variable
             name="DetailTransparentActivity"
             type="com.silvertak.relationshipsmanager.view.DetailTransparentActivity" />

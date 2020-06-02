@@ -3,7 +3,7 @@
     <data>
         <variable
             name="RelationshipGroupInfo"
-            type="com.silvertak.relationshipsmanager.data.RelationshipGroupInfo" />
+            type="com.silvertak.relationshipsmanager.vo.RelationshipGroupInfo" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"

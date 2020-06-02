@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager.data;
+package com.silvertak.relationshipsmanager.vo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,9 +7,7 @@ import android.os.Parcelable;
 
 import com.silvertak.relationshipsmanager.library.StringLib;
 
-import java.io.Serializable;
-
-public class ContactInfo implements Parcelable {
+public class ContactInfoVO implements Parcelable {
 
     private String strId = "";
     private String strName = "";
@@ -19,7 +17,7 @@ public class ContactInfo implements Parcelable {
 
     private byte[] photoBytes = new byte[]{};
 
-    protected ContactInfo(Parcel in) {
+    protected ContactInfoVO(Parcel in) {
         strId = in.readString();
         strName = in.readString();
         strPhoneNumber = in.readString();
@@ -29,15 +27,15 @@ public class ContactInfo implements Parcelable {
         in.readByteArray(photoBytes);
     }
 
-    public static final Creator<ContactInfo> CREATOR = new Creator<ContactInfo>() {
+    public static final Creator<ContactInfoVO> CREATOR = new Creator<ContactInfoVO>() {
         @Override
-        public ContactInfo createFromParcel(Parcel in) {
-            return new ContactInfo(in);
+        public ContactInfoVO createFromParcel(Parcel in) {
+            return new ContactInfoVO(in);
         }
 
         @Override
-        public ContactInfo[] newArray(int size) {
-            return new ContactInfo[size];
+        public ContactInfoVO[] newArray(int size) {
+            return new ContactInfoVO[size];
         }
     };
 
@@ -57,7 +55,7 @@ public class ContactInfo implements Parcelable {
         parcel.writeByteArray(photoBytes);
     }
 
-    public ContactInfo(String id, String name, String phoneNumber, String photoId, String email)
+    public ContactInfoVO(String id, String name, String phoneNumber, String photoId, String email)
     {
         if(!StringLib.isEmpty(id)) this.strId = id;
         if(!StringLib.isEmpty(name)) this.strName = name;

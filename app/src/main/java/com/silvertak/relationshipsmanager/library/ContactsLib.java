@@ -2,11 +2,9 @@ package com.silvertak.relationshipsmanager.library;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
 
-import com.silvertak.relationshipsmanager.data.ContactInfo;
+import com.silvertak.relationshipsmanager.vo.ContactInfoVO;
 
 import java.util.ArrayList;
 
@@ -22,8 +20,8 @@ public class ContactsLib {
     /**
      * 주소록 정보 가져오기.
      */
-    public ArrayList<ContactInfo> getContacts(){
-        ArrayList<ContactInfo> arrayList = new ArrayList<>();
+    public ArrayList<ContactInfoVO> getContacts(){
+        ArrayList<ContactInfoVO> arrayList = new ArrayList<>();
 
         Cursor cursor = mActivity.managedQuery(
                 ContactsContract.Contacts.CONTENT_URI,
@@ -44,7 +42,7 @@ public class ContactsLib {
                 String v_phone = contactsPhone(v_id);
                 String v_email = contactsEmail(v_id);
 
-                ContactInfo contactInfo = new ContactInfo(v_id, v_display_name, v_phone, v_photo_id, v_email);
+                ContactInfoVO contactInfo = new ContactInfoVO(v_id, v_display_name, v_phone, v_photo_id, v_email);
                 if(!StringLib.isEmpty(v_photo_id))
                     contactInfo.setPhotoBytes(queryContactImage(Integer.valueOf(v_photo_id)));
 

@@ -1,12 +1,11 @@
 package com.silvertak.relationshipsmanager.library;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.provider.CallLog;
 import android.util.Log;
 
-import com.silvertak.relationshipsmanager.data.CallLogInfo;
+import com.silvertak.relationshipsmanager.vo.CallLogVO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,8 +60,8 @@ public class CallLogLib {
     }
 
     // CallLog를 반환합니다.
-    public ArrayList<CallLogInfo> getCallLog() {
-        ArrayList<CallLogInfo> callLogInfos = new ArrayList<>();
+    public ArrayList<CallLogVO> getCallLog() {
+        ArrayList<CallLogVO> callLogInfos = new ArrayList<>();
 
         Cursor managedCursor = mActivity.managedQuery(CallLog.Calls.CONTENT_URI, null,
                 null, null, null);
@@ -84,7 +83,7 @@ public class CallLogLib {
 
             Log.i("callLog", "type : " + callType + ", number : " + phNumber);
 
-            callLogInfos.add(new CallLogInfo(phNumber, Integer.valueOf(callType), callDayTime, Integer.valueOf(callDuration)));
+            callLogInfos.add(new CallLogVO(phNumber, Integer.valueOf(callType), callDayTime, Integer.valueOf(callDuration)));
         }
         managedCursor.close();
 

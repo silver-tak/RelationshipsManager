@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.silvertak.relationshipsmanager.Consts
 import com.silvertak.relationshipsmanager.R
 import com.silvertak.relationshipsmanager.adapter.ContactRankingAdapter
 import com.silvertak.relationshipsmanager.databinding.FragmentStatusBinding
@@ -24,7 +25,7 @@ import com.silvertak.relationshipsmanager.viewmodel.StatusViewModel
 
 class StatusFragment : BaseFragment() {
     private lateinit var mBinding: FragmentStatusBinding
-    private var statusViewModel: StatusViewModel? = null
+    private lateinit var statusViewModel: StatusViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         statusViewModel = ViewModelProviders.of(this).get(StatusViewModel::class.java).apply {
@@ -34,6 +35,20 @@ class StatusFragment : BaseFragment() {
                 .apply {
                     vm = statusViewModel
                     lifecycleOwner = this@StatusFragment
+                    statusViewModel.relationshipScore.observe(this@StatusFragment, Observer<Int> {
+                        setFaceLevel(it)
+                        setRelationshipComment(it)
+
+                        ValueAnimator().run {
+                            setObjectValues(0, it?.let { Integer.valueOf(it) })
+                            addUpdateListener { animator: ValueAnimator ->
+                                this@apply.scoreTv.text = animator.animatedValue.toString() + "점"
+                            }
+                            interpolator = DecelerateInterpolator()
+                            duration = Consts.VALUE_ANIMATION_DURATION.toLong()
+                            start()
+                        }
+                    })
                 }
         return mBinding.root
     }
@@ -49,51 +64,39 @@ class StatusFragment : BaseFragment() {
                 }
             }
             mBinding.MostContactRankingRecyclerView.adapter = this
-            statusViewModel?.prepareVisibleData()
+            statusViewModel.prepareVisibleData()
         }
 
-        animationValue.observe(this, Observer<Int> {
-            setFaceLevel(it)
-            setRelationshipComment(it)
-        })
+
     }
 
     private fun setFaceLevel(nValue: Int) {
-        if (nValue <= 25) mBinding!!.faceLevelIv.setImageResource(R.mipmap.level1)
-        else if (nValue <= 50) mBinding!!.faceLevelIv.setImageResource(R.mipmap.level2)
-        else if (nValue <= 75) mBinding!!.faceLevelIv.setImageResource(R.mipmap.level3)
-        else if (nValue <= 100) mBinding!!.faceLevelIv.setImageResource(R.mipmap.level4)
+        when(nValue)
+        {
+            in 0..25 -> {mBinding.faceLevelIv.setImageResource(R.mipmap.level1)}
+            in 26..50 -> {mBinding.faceLevelIv.setImageResource(R.mipmap.level2)}
+            in 51..75 -> {mBinding.faceLevelIv.setImageResource(R.mipmap.level3)}
+            in 76..100 -> {mBinding.faceLevelIv.setImageResource(R.mipmap.level4)}
+            else -> {mBinding.faceLevelIv.setImageResource(R.mipmap.level4)}
+        }
     }
 
     private fun setRelationshipComment(nValue: Int) {
-        if (nValue <= 25) mBinding!!.scoreCommentTv.setText(R.string.score_1_comment)
-        else if (nValue <= 50) mBinding!!.scoreCommentTv.setText(R.string.score_2_comment)
-        else if (nValue <= 75) mBinding!!.scoreCommentTv.setText(R.string.score_3_comment)
-        else if (nValue <= 100) mBinding!!.scoreCommentTv.setText(R.string.score_4_comment)
+        when(nValue)
+        {
+            in 0..25 -> {mBinding.scoreCommentTv.text = getString(R.string.score_1_comment)}
+            in 26..50 -> {mBinding.scoreCommentTv.text = getString(R.string.score_2_comment)}
+            in 51..75 -> {mBinding.scoreCommentTv.text = getString(R.string.score_3_comment)}
+            in 76..100 -> {mBinding.scoreCommentTv.text = getString(R.string.score_4_comment)}
+            else -> {mBinding.scoreCommentTv.text = getString(R.string.score_4_comment)}
+        }
     }
 
     companion object {
-        private val animationValue: MutableLiveData<Int> = MutableLiveData()
         fun newInstance(args: Bundle?): StatusFragment {
             val fragment = StatusFragment()
             fragment.arguments = args
             return fragment
-        }
-
-        @JvmStatic
-        @BindingAdapter("setScore")
-        fun setScoreAnimation(view: TextView, strValue: String?) {
-            if (StringLib.isEmpty(strValue)) return
-            val nValue = Integer.valueOf(strValue!!)
-            val valueAnimator = ValueAnimator()
-            valueAnimator.setObjectValues(0, nValue)
-            valueAnimator.addUpdateListener { animator: ValueAnimator ->
-                view.text = animator.animatedValue.toString() + "점"
-                animationValue.value = animator.animatedValue as Int
-            }
-            valueAnimator.interpolator = DecelerateInterpolator()
-            valueAnimator.duration = 2000
-            valueAnimator.start()
         }
     }
 }

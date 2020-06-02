@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager.data;
+package com.silvertak.relationshipsmanager.vo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CallLogInfo implements Parcelable {
+public class CallLogVO implements Parcelable {
 
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 aa HH:mm");
 
@@ -17,7 +17,7 @@ public class CallLogInfo implements Parcelable {
     private Date callDate;
     private String strCallDate = "";
 
-    public CallLogInfo(String phoneNumber, int callType, Date callDate, int callDuration)
+    public CallLogVO(String phoneNumber, int callType, Date callDate, int callDuration)
     {
         this.strPhoneNumber = phoneNumber;
         this.nCallType = callType;
@@ -26,7 +26,7 @@ public class CallLogInfo implements Parcelable {
         this.strCallDate = simpleDateFormat.format(callDate);
     }
 
-    protected CallLogInfo(Parcel in) {
+    protected CallLogVO(Parcel in) {
         strPhoneNumber = in.readString();
         nCallType = in.readInt();
         nCallDuration = in.readInt();
@@ -41,15 +41,15 @@ public class CallLogInfo implements Parcelable {
         }
     }
 
-    public static final Creator<CallLogInfo> CREATOR = new Creator<CallLogInfo>() {
+    public static final Creator<CallLogVO> CREATOR = new Creator<CallLogVO>() {
         @Override
-        public CallLogInfo createFromParcel(Parcel in) {
-            return new CallLogInfo(in);
+        public CallLogVO createFromParcel(Parcel in) {
+            return new CallLogVO(in);
         }
 
         @Override
-        public CallLogInfo[] newArray(int size) {
-            return new CallLogInfo[size];
+        public CallLogVO[] newArray(int size) {
+            return new CallLogVO[size];
         }
     };
 

@@ -9,11 +9,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
-import androidx.databinding.ViewDataBinding
 
 import com.silvertak.relationshipsmanager.R
 import com.silvertak.relationshipsmanager.adapter.CallLogAdapter
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo
 import com.silvertak.relationshipsmanager.databinding.ActivityDetailTransparentBinding
 import com.silvertak.relationshipsmanager.define.StringDefine
 import com.silvertak.relationshipsmanager.viewmodel.DetailTransparentViewModel

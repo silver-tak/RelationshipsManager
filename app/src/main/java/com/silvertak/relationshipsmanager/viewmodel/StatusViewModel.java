@@ -1,16 +1,9 @@
 package com.silvertak.relationshipsmanager.viewmodel;
 
-import android.os.Bundle;
-
 import androidx.databinding.ObservableArrayList;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.silvertak.relationshipsmanager.data.CallLogInfo;
-import com.silvertak.relationshipsmanager.data.ContactInfo;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipArray;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
-import com.silvertak.relationshipsmanager.library.DataCombineLib;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 
 import java.util.ArrayList;
 
@@ -26,8 +19,7 @@ public class StatusViewModel extends BaseViewModel {
         mostContactRankingList.clear();
 
         ArrayList<PersonRelationshipInfo> mostContactRankingArray = personRelationshipInfos.getMostContactRanking();
-        for(PersonRelationshipInfo info : mostContactRankingArray)
-            mostContactRankingList.add(info);
+        mostContactRankingList.addAll(mostContactRankingArray);
     }
 
     public void setRelationshipScore(int nValue)

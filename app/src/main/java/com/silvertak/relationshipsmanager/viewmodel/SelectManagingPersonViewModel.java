@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 
 public class SelectManagingPersonViewModel extends BaseViewModel {
 

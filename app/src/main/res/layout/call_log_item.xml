@@ -3,7 +3,7 @@
     <data>
         <variable
             name="CallLogInfo"
-            type="com.silvertak.relationshipsmanager.data.CallLogInfo" />
+            type="com.silvertak.relationshipsmanager.vo.CallLogVO" />
     </data>
     <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"

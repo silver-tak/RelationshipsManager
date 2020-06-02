@@ -6,10 +6,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.silvertak.relationshipsmanager.data.RelationshipGroupInfo;
+import com.silvertak.relationshipsmanager.vo.RelationshipGroupInfo;
 import com.silvertak.relationshipsmanager.define.JsonStringDefine;
-
-import java.util.ArrayList;
 
 public class GroupModifyViewModel extends BaseViewModel {
 

@@ -1,27 +1,24 @@
 package com.silvertak.relationshipsmanager.library;
 
-import android.util.Log;
-
-import com.silvertak.relationshipsmanager.data.CallLogInfo;
-import com.silvertak.relationshipsmanager.data.ContactInfo;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipArray;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.vo.CallLogVO;
+import com.silvertak.relationshipsmanager.vo.ContactInfoVO;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipArray;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 
 import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class DataCombineLib {
 
-    public static PersonRelationshipArray combineContactWithCallLog(ArrayList<ContactInfo> contactInfos, ArrayList<CallLogInfo> callLogInfos)
+    public static PersonRelationshipArray combineContactWithCallLog(ArrayList<ContactInfoVO> contactInfos, ArrayList<CallLogVO> callLogInfos)
     {
         PersonRelationshipArray resultArray = new PersonRelationshipArray();
 
-        for(ContactInfo contactInfo : contactInfos)
+        for(ContactInfoVO contactInfo : contactInfos)
         {
             PersonRelationshipInfo info = new PersonRelationshipInfo();
             info.setContactInfo(contactInfo);
 
-            for(CallLogInfo callLogInfo : callLogInfos)
+            for(CallLogVO callLogInfo : callLogInfos)
             {
                 String callLogPhoneNumber = StringLib.getOnlyNumber(callLogInfo.getPhoneNumber());
                 String contactInfoPhoneNumber = StringLib.getOnlyNumber(contactInfo.getPhoneNumber());

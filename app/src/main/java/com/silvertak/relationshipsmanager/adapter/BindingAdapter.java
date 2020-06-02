@@ -1,10 +1,8 @@
 package com.silvertak.relationshipsmanager.adapter;
 
-import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.CallLog;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,8 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.silvertak.relationshipsmanager.R;
 import com.silvertak.relationshipsmanager.customView.CallTypeCustomView;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
-import com.silvertak.relationshipsmanager.library.StringLib;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 
 public class BindingAdapter {
     @androidx.databinding.BindingAdapter({"bind:contactRankingItem"})

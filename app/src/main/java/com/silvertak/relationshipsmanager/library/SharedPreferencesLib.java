@@ -12,10 +12,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo;
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo;
 import com.silvertak.relationshipsmanager.define.JsonStringDefine;
-
-import org.json.JSONObject;
 
 public class SharedPreferencesLib {
     public static SharedPreferencesLib singleTon;

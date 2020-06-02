@@ -1,4 +1,4 @@
-package com.silvertak.relationshipsmanager.data;
+package com.silvertak.relationshipsmanager.vo;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,16 +9,11 @@ import java.util.ArrayList;
 
 public class PersonRelationshipInfo implements Parcelable, Comparable{
 
-    private ContactInfo mContactInfo;
-    private ArrayList<CallLogInfo> mCallLogInfos = new ArrayList<>();
+    private ContactInfoVO mContactInfo;
+    private ArrayList<CallLogVO> mCallLogInfos = new ArrayList<>();
     private MutableLiveData<Boolean> isSelected = new MutableLiveData<>();  // RecyclerView List의 항목일 때 선택되었는지 여부
 
-    public PersonRelationshipInfo()
-    {
-
-    }
-
-    public PersonRelationshipInfo(ContactInfo contactInfo, ArrayList<CallLogInfo> callLogInfos)
+    public PersonRelationshipInfo(ContactInfoVO contactInfo, ArrayList<CallLogVO> callLogInfos)
     {
         this.mContactInfo = contactInfo;
         this.mCallLogInfos = callLogInfos;
@@ -34,23 +29,23 @@ public class PersonRelationshipInfo implements Parcelable, Comparable{
             return -1;
     }
 
-    public ContactInfo getContactInfo() {
+    public ContactInfoVO getContactInfo() {
         return mContactInfo;
     }
 
-    public void setContactInfo(ContactInfo mContactInfo) {
+    public void setContactInfo(ContactInfoVO mContactInfo) {
         this.mContactInfo = mContactInfo;
     }
 
-    public ArrayList<CallLogInfo> getCallLogInfos() {
+    public ArrayList<CallLogVO> getCallLogInfos() {
         return mCallLogInfos;
     }
 
-    public void setCallLogInfos(ArrayList<CallLogInfo> mCallLogInfos) {
+    public void setCallLogInfos(ArrayList<CallLogVO> mCallLogInfos) {
         this.mCallLogInfos = mCallLogInfos;
     }
 
-    public void addCallLogInfo(CallLogInfo callLogInfo)
+    public void addCallLogInfo(CallLogVO callLogInfo)
     {
         this.mCallLogInfos.add(callLogInfo);
     }
@@ -80,8 +75,8 @@ public class PersonRelationshipInfo implements Parcelable, Comparable{
     }
 
     protected PersonRelationshipInfo(Parcel in) {
-        mContactInfo = in.readParcelable(ContactInfo.class.getClassLoader());
-        mCallLogInfos = in.createTypedArrayList(CallLogInfo.CREATOR);
+        mContactInfo = in.readParcelable(ContactInfoVO.class.getClassLoader());
+        mCallLogInfos = in.createTypedArrayList(CallLogVO.CREATOR);
     }
 
     public static final Creator<PersonRelationshipInfo> CREATOR = new Creator<PersonRelationshipInfo>() {

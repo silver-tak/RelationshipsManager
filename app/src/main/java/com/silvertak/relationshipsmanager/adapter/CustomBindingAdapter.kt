@@ -1,12 +1,9 @@
 package com.silvertak.relationshipsmanager.adapter
 
-import android.animation.ValueAnimator
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.provider.CallLog
-import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
-import android.widget.TextView
 
 import androidx.databinding.ObservableArrayList
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.silvertak.relationshipsmanager.R
-import com.silvertak.relationshipsmanager.data.PersonRelationshipInfo
-import com.silvertak.relationshipsmanager.library.StringLib
+import com.silvertak.relationshipsmanager.vo.PersonRelationshipInfo
 
 class CustomBindingAdapter
 {
